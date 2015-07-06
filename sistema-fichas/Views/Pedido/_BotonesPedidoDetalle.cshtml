@@ -1,0 +1,47 @@
+﻿@model sistema_fichas.Business.Pedido
+
+
+<div class="col-xs-12 col-md-12">
+    <div class="form-group pull-right">
+        @if (Model.EstadoPedido.Estado == 1 || Model.EstadoPedido.Estado == 4)
+        {
+           
+            <a href="#" id="editar_pedido" data-toggle="modal" data-target="#modal_contenido" data-id="@Model.ID">
+                @Html.BSbutton("info btn-sm", "Editar info", "check")
+            </a>
+
+            <a href="#" class="cambiar_estado" data-id="@Model.ID" data-text="enviar a revisión" data-action="2">
+                @Html.BSbutton("primary btn-sm", "Enviar a revisión", "paper-plane")
+            </a>
+
+        }
+        else if (Model.EstadoPedido.Estado == 2)
+        {
+            <a href="#" class="cambiar_estado" data-id="@Model.ID" data-text="rechazar" data-action="4">
+                @Html.BSbutton("warning btn-sm", "Rechazar pedido", "ban")
+            </a>
+            <a href="#" class="cambiar_estado" data-id="@Model.ID" data-text="aceptar" data-action="3">
+                @Html.BSbutton("success btn-sm ", "Aceptar pedido", "check")
+            </a>
+
+        }
+
+
+        @if (Model.EstadoPedido.Estado == 0)
+        {
+
+            <button class="btn btn-success btn-sm cambiar_estado" data-id="@Model.ID" data-text="activar" data-action="1">
+                <span class="fa fa-check"></span> Activar Pedido
+            </button>
+
+        }
+        else
+        {
+                <button class="btn btn-danger btn-sm cambiar_estado" data-id="@Model.ID" data-text="anular" data-action="0">
+                    <span class="fa fa-check"></span> Anular Pedido
+                </button>
+        }
+
+
+      </div>
+</div>

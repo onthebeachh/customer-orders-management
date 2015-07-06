@@ -1,0 +1,16 @@
+C:\Samtech\sistema-fichas\sistema-fichas.Repository\bin\Release\sistema-fichas.Repository.dll.config
+C:\Samtech\sistema-fichas\sistema-fichas.Repository\bin\Release\sistema-fichas.Repository.dll
+C:\Samtech\sistema-fichas\sistema-fichas.Repository\bin\Release\sistema-fichas.Repository.pdb
+C:\Samtech\sistema-fichas\sistema-fichas.Repository\bin\Release\EntityFramework.dll
+C:\Samtech\sistema-fichas\sistema-fichas.Repository\bin\Release\EntityFramework.SqlServer.dll
+C:\Samtech\sistema-fichas\sistema-fichas.Repository\bin\Release\sistema-fichas.Business.Core.dll
+C:\Samtech\sistema-fichas\sistema-fichas.Repository\bin\Release\sistema-fichas.Business.dll
+C:\Samtech\sistema-fichas\sistema-fichas.Repository\bin\Release\sistema-fichas.Repository.Core.dll
+C:\Samtech\sistema-fichas\sistema-fichas.Repository\bin\Release\sistema-fichas.Business.Core.pdb
+C:\Samtech\sistema-fichas\sistema-fichas.Repository\bin\Release\sistema-fichas.Business.pdb
+C:\Samtech\sistema-fichas\sistema-fichas.Repository\bin\Release\sistema-fichas.Repository.Core.pdb
+C:\Samtech\sistema-fichas\sistema-fichas.Repository\bin\Release\EntityFramework.xml
+C:\Samtech\sistema-fichas\sistema-fichas.Repository\bin\Release\EntityFramework.SqlServer.xml
+C:\Samtech\sistema-fichas\sistema-fichas.Repository\obj\Release\sistema-fichas.Repository.csprojResolveAssemblyReference.cache
+C:\Samtech\sistema-fichas\sistema-fichas.Repository\obj\Release\sistema-fichas.Repository.dll
+C:\Samtech\sistema-fichas\sistema-fichas.Repository\obj\Release\sistema-fichas.Repository.pdb
