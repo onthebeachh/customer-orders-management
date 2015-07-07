@@ -50,41 +50,53 @@ namespace sistema_fichas.Business
         public int Pedido_ID { get; set; }
 
         [DisplayName("Estado")]
+        [DisplayFormat(NullDisplayText = "N/A")]
         public int EstadoDetalle_ID { get; set; }
 
         [DisplayName("Catálogo")]
+        [DisplayFormat(NullDisplayText = "N/A")]
         public int? Catalogo_ID { get; set; }
 
         [DisplayName("Herramienta")]
+        [DisplayFormat(NullDisplayText = "N/A")]
         public int? Herramienta_ID { get; set; }
 
         [DisplayName("Modalidad")]
+        [DisplayFormat(NullDisplayText = "N/A")]
         public int? Modalidad_ID { get; set; }
 
         [DisplayName("MonedaCobro")]
+        [DisplayFormat(NullDisplayText = "N/A")]
         public int Moneda_ID { get; set; }
 
         [DisplayName("Catálogo")]
         [ForeignKey("Catalogo_ID")]
+        [DisplayFormat(NullDisplayText = "N/A")]
         public virtual Catalogo Catalogo { get; set; }
 
         [DisplayName("Modalidad")]
         [ForeignKey("Modalidad_ID")]
+        [DisplayFormat(NullDisplayText = "N/A")]
         public virtual Modalidad Modalidad { get; set; }
 
         [DisplayName("Herramienta")]
         [ForeignKey("Herramienta_ID")]
+        [DisplayFormat(NullDisplayText = "N/A")]
         public virtual Herramienta Herramienta { get; set; }
 
         [DisplayName("Pedido")]
         [ForeignKey("Pedido_ID")]
+        [DisplayFormat(NullDisplayText = "N/A")]
         public virtual Pedido Pedido { get; set; }
 
         [DisplayName("Estado")]
         [ForeignKey("EstadoDetalle_ID")]
+        [DisplayFormat(NullDisplayText = "N/A")]
         public virtual EstadoDetalle EstadoDetalle { get; set; }
 
         [ForeignKey("Moneda_ID")]
+        [DisplayName("Estado")]
+        [DisplayFormat(NullDisplayText = "N/A")]
         public virtual Moneda Moneda { get; set; }
 
     }

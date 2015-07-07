@@ -11,9 +11,11 @@ namespace sistema_fichas.Business
     public class Moneda : Entity<int>
     {
         [StringLength(245)]
+        [DisplayFormat(NullDisplayText = "N/A")]
         public string Nombre { get; set; }
 
         [StringLength(245)]
+        [DisplayFormat(NullDisplayText = "N/A")]
         public string Alias { get; set; }
 
         [DefaultValue(1)]

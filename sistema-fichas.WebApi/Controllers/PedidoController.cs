@@ -1,4 +1,5 @@
 ﻿using sistema_fichas.Business;
+using sistema_fichas.WebApi.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -14,13 +15,69 @@ namespace sistema_fichas.WebApi.Controllers
 
         FichasContext _db = new FichasContext();
 
-        public IEnumerable<Pedido> Get()
+        public IList<PedidoConDetalles> Get()
         {
             _db.Configuration.LazyLoadingEnabled = false;
             _db.Configuration.ProxyCreationEnabled = false;
 
+            IEnumerable<Pedido> pedidos = _db.Pedidos
+                .Where(x => x.EstadoPedido.Estado == 5)
+                .Include(x => x.PedidosDetalle)
+                .Include(x => x.Cliente)
+                .Include(x => x.UserProfile)
+                .Include(x => x.EstadoPedido)
+                .ToList();
 
-            return _db.Pedidos.ToList();
+            List<PedidoConDetalles> pedidosConDetalles = new List<PedidoConDetalles>();
+            pedidosConDetalles.Clear();
+
+            
+            foreach (Pedido p in pedidos)
+            {
+                PedidoConDetalles pedidoConDetalle = new PedidoConDetalles();
+                pedidoConDetalle.Pedido_ID = p.ID;
+                pedidoConDetalle.Pedido_FechaInicio = p.FechaInicio.Value;
+                pedidoConDetalle.Cliente_ID = p.Cliente_ID;
+                pedidoConDetalle.Cliente_NombreFantasia = p.Cliente.NombreFantasia;
+                pedidoConDetalle.Cliente_RazonSocial = p.Cliente.RazonSocial;
+                pedidoConDetalle.Cliente_RUT = p.Cliente.Rut;
+
+                pedidoConDetalle.Estado_ID = p.EstadoPedido_ID.Value;
+                pedidoConDetalle.Estado_Codigo = p.EstadoPedido.Estado;
+                pedidoConDetalle.Estado_Nombre = p.EstadoPedido.Nombre;
+
+                pedidoConDetalle.Ejecutivo_ID = p.UserProfile_ID;
+                pedidoConDetalle.Ejecutivo_Nombre = p.UserProfile.UserName;
+
+                IList<PedidoDetalle> actividades = null;
+                actividades = p.PedidosDetalle.Where(x => x.Tipo == TipoPedidoDetalle.Actividad.GetHashCode()).ToList();
+
+                if (actividades.Count > 0)
+                {
+                    pedidoConDetalle.Pedido_actividades = new List<ActividadSimple>();
+                    pedidoConDetalle.Pedido_actividades = actividades.Select(x => new ActividadSimple
+                    {
+
+                        Actividad_ID = Convert.ToInt32(x.ID),
+                        Actividad_Cantidad = x.Cantidad.Value,
+                        //Actividad_Nombre = x.Catalogo.Nombre,
+                        Actividad_Fecha = x.FechaInicio.Value,
+                        Estado_ID = x.EstadoDetalle_ID,
+                        //Estado_Nombre = x.EstadoDetalle.Nombre,
+                        Moneda_ID = x.Moneda_ID,
+                        //Moneda_Alias = x.Moneda.Alias
+
+
+                    }).ToList();
+
+                }
+                else {
+                    pedidoConDetalle.Pedido_actividades = null;
+                }
+                pedidosConDetalles.Add(pedidoConDetalle);
+            }
+
+            return pedidosConDetalles.ToList();
         }
 
         public Pedido Get(int id)

@@ -13,10 +13,12 @@ namespace sistema_fichas.Business
 
         [Required(ErrorMessage = "Debe Ingresar un Nombre")]
         [DisplayName("Nombre")]
+        [DisplayFormat(NullDisplayText = "N/A")]
         public string Nombre { get; set; }
 
         [Required(ErrorMessage = "Debe Ingresar un Tipo")]
         [DisplayName("Tipo")]
+        [DisplayFormat(NullDisplayText = "N/A")]
         public int Tipo { get; set; }
 
         public virtual ICollection<PedidoDetalle> PedidosDetalle { get; set; }

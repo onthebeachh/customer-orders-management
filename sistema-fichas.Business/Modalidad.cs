@@ -12,6 +12,7 @@ namespace sistema_fichas.Business
     {
         [Required]
         [DisplayName("Nombre")]
+        [DisplayFormat(NullDisplayText = "N/A")]
         public string Nombre { get; set; }
 
         [DisplayName("Estado")]
