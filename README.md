@@ -1,5 +1,5 @@
 # customer-orders-management
-SDF is Web based application based on .NET + MSSQL Server 2008. It implements good practices (obviously always with continious improvement - refactoring)  like dependency injection with Autofac, Multi-tiers Architecture
+SDF is a web-based application which is built on .NET + MSSQL Server 2008. It implements good practices (obviously trying to continiously improve it - refactoring) like dependency injection with Autofac, Multi-tiers Architecture, Web Services/WebAPI as Middlewares, etc
 
 #Features
 
