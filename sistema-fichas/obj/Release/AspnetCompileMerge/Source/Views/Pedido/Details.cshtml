@@ -124,8 +124,7 @@
             agregar_producto($(this).attr('data-id'));
         });
 
-        function agregar_producto(PedidoID)
-        {
+        function agregar_producto(PedidoID) {
             resetModal("Agregar Producto");
             $.ajax({
                 url: '@Url.Action("AgregarProducto","Pedido")',
@@ -209,7 +208,7 @@
         $(document).on("click", ".cambiar_estado", function () { cambiar_estado($(this).attr('data-id'), $(this).attr('data-action'), $(this).attr('data-text')) });
         function cambiar_estado(PedidoID, ActionID, ActionName) {
 
-            if (confirm("¿Está seguro de "+ActionName+" este pedido?")) {
+            if (confirm("¿Está seguro de " + ActionName + " este pedido?")) {
                 $.ajax({
                     url: '@(Url.Action("CambiarEstado","Pedido"))',
                     data: { PedidoID: PedidoID, Estado: ActionID },
@@ -278,7 +277,6 @@
                 data: { PedidoID: PedidoID },
                 type: 'GET'
             }).done(function (data) {
-                
                 $("#modal_body").html(data);
                 $('#modal_contenido').css('width', 'auto');
                 $("#boton_guardar").off('click');
@@ -300,23 +298,16 @@
                             msg_modal_alert(data.msg, 'success');
                             $('#boton_guardar').addClass('hidden');
                             $('#div_herramientas').html(data.contenido);
-
                         } else {
                             msg_modal_alert(data.msg, 'danger');
                         }
-                        contenidoElemento($("#boton_guardar"), 'Guardar', null, 'disabled');
-
+                        contenidoElemento($("#boton_guardar"), 'Guardar', null, 'disabled')
                     });
                     return false;
-
                 });
             });
         }
 
-        /*
-        Funcion para crear un adjunto al pedido
-        Requiere de la ID Pedido
-        */
         $("#agregar_adjunto").click(function () { crear_adjunto($(this).attr('data-id')) });
         function crear_adjunto(PedidoID) {
             resetModal("Agregar archivo adjunto");
@@ -327,9 +318,7 @@
             }).done(function (data) {
                 $("#modal_body").html(data);
                 $("#boton_guardar").off('click');
-                $("#boton_guardar").click(function () {
-                    $("#modal_body form").submit();
-                });
+                $("#boton_guardar").click(function () { $("#modal_body form").submit(); });
                 $("#modal_body form").submit(function () {
                     contenidoElemento($("#boton_guardar"), '<i class="fa fa-cog fa-spin"> </i> Guardando...', 'disabled', null);
                     event.preventDefault();
@@ -413,6 +402,24 @@
             }
         }
 
+        $('.ver_detalle').click(function () { ver_detalle($(this).attr('data-id'), $(this).attr('data-type')) });
+        function ver_detalle(id, tipo)
+        {   
+            resetModal("Ver Detalle");
+            $("#boton_guardar").off('click');
+            $("#boton_guardar").addClass('hidden');
+
+            $("#modal_contenido").modal("show")
+            $.ajax({
+                url: '@Url.Action("VerPedidoDetalle", "Pedido")',
+                data: { PedidoDetalleID: id, TipoPedidoDetalle: tipo},
+                type: 'POST'
+            }).done(function (data)
+            {
+                $("#modal_body").html(data);
+            });
+
+        }
 
 
         $(".borrar_detalle").click(function () { eliminar_detalle($(this).attr('data-id'), $(this).attr('data-type')) });
@@ -422,7 +429,7 @@
                     url: '@(Url.Action("EliminarDetallePedido", "Pedido"))',
                     data: { PedidoDetalleID: PedidoDetalleID },
                     type: 'POST'
-                }).done(function (data) {
+                }).done(function (data){
                     alert(data.msg);
                     event.preventDefault();
                     if (data.status == true) {

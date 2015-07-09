@@ -31,55 +31,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sistema-fichas.Test", "sist
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sistema-fichas.WebService", "sistema-fichas.WebService\sistema-fichas.WebService.csproj", "{6011F4F5-EB07-4368-B851-09E3B10B03F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sistema-fichas.WebApi", "sistema-fichas.WebApi\sistema-fichas.WebApi.csproj", "{2173820C-9D01-4BCF-965A-7CC415525A03}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sistema_fichas.WebApi", "sistema-fichas.WebApi\sistema_fichas.WebApi.csproj", "{10BEB50F-0910-424F-921D-021655571288}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 11
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://samtech-desarrollo.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = sistema-fichas\\sistema-fichas.Presentation.csproj
-		SccProjectTopLevelParentUniqueName1 = sistema-fichas.sln
-		SccProjectName1 = sistema-fichas
-		SccLocalPath1 = sistema-fichas
-		SccProjectUniqueName2 = sistema-fichas.Service.Core\\sistema-fichas.Service.Core.csproj
-		SccProjectTopLevelParentUniqueName2 = sistema-fichas.sln
-		SccProjectName2 = sistema-fichas.Service.Core
-		SccLocalPath2 = sistema-fichas.Service.Core
-		SccProjectUniqueName3 = sistema-fichas.Service\\sistema-fichas.Service.csproj
-		SccProjectTopLevelParentUniqueName3 = sistema-fichas.sln
-		SccProjectName3 = sistema-fichas.Service
-		SccLocalPath3 = sistema-fichas.Service
-		SccProjectUniqueName4 = sistema-fichas.Business.Core\\sistema-fichas.Business.Core.csproj
-		SccProjectTopLevelParentUniqueName4 = sistema-fichas.sln
-		SccProjectName4 = sistema-fichas.Business.Core
-		SccLocalPath4 = sistema-fichas.Business.Core
-		SccProjectUniqueName5 = sistema-fichas.Business\\sistema-fichas.Business.csproj
-		SccProjectTopLevelParentUniqueName5 = sistema-fichas.sln
-		SccProjectName5 = sistema-fichas.Business
-		SccLocalPath5 = sistema-fichas.Business
-		SccProjectUniqueName6 = sistema-fichas.Repository.Core\\sistema-fichas.Repository.Core.csproj
-		SccProjectTopLevelParentUniqueName6 = sistema-fichas.sln
-		SccProjectName6 = sistema-fichas.Repository.Core
-		SccLocalPath6 = sistema-fichas.Repository.Core
-		SccProjectUniqueName7 = sistema-fichas.Repository\\sistema-fichas.Repository.csproj
-		SccProjectTopLevelParentUniqueName7 = sistema-fichas.sln
-		SccProjectName7 = sistema-fichas.Repository
-		SccLocalPath7 = sistema-fichas.Repository
-		SccProjectUniqueName8 = sistema-fichas.Test\\sistema-fichas.Test.csproj
-		SccProjectTopLevelParentUniqueName8 = sistema-fichas.sln
-		SccProjectName8 = sistema-fichas.Test
-		SccLocalPath8 = sistema-fichas.Test
-		SccProjectUniqueName9 = sistema-fichas.WebService\\sistema-fichas.WebService.csproj
-		SccProjectTopLevelParentUniqueName9 = sistema-fichas.sln
-		SccProjectName9 = sistema-fichas.WebService
-		SccLocalPath9 = sistema-fichas.WebService
-		SccProjectUniqueName10 = sistema-fichas.WebApi\\sistema-fichas.WebApi.csproj
-		SccProjectTopLevelParentUniqueName10 = sistema-fichas.sln
-		SccProjectName10 = sistema-fichas.WebApi
-		SccLocalPath10 = sistema-fichas.WebApi
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -121,10 +75,10 @@ Global
 		{6011F4F5-EB07-4368-B851-09E3B10B03F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6011F4F5-EB07-4368-B851-09E3B10B03F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6011F4F5-EB07-4368-B851-09E3B10B03F8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2173820C-9D01-4BCF-965A-7CC415525A03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2173820C-9D01-4BCF-965A-7CC415525A03}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2173820C-9D01-4BCF-965A-7CC415525A03}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2173820C-9D01-4BCF-965A-7CC415525A03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10BEB50F-0910-424F-921D-021655571288}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10BEB50F-0910-424F-921D-021655571288}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10BEB50F-0910-424F-921D-021655571288}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10BEB50F-0910-424F-921D-021655571288}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -139,6 +93,6 @@ Global
 		{6424CBA0-002F-4016-8DD4-E676F8A437A4} = {46D2EB56-33E4-47A7-B626-533CD2D94CDF}
 		{F424CEF8-865D-4494-9387-2835BFCC134C} = {38991D59-0313-4A92-BE37-82588BF4D3E4}
 		{6011F4F5-EB07-4368-B851-09E3B10B03F8} = {D7939CC6-BA61-4EFB-A978-6F7D24F2800D}
-		{2173820C-9D01-4BCF-965A-7CC415525A03} = {D7939CC6-BA61-4EFB-A978-6F7D24F2800D}
+		{10BEB50F-0910-424F-921D-021655571288} = {D7939CC6-BA61-4EFB-A978-6F7D24F2800D}
 	EndGlobalSection
 EndGlobal

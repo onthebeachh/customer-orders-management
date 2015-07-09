@@ -1,4 +1,5 @@
 ﻿using sistema_fichas.Business;
+using sistema_fichas.Service.Core;
 using sistema_fichas.WebApi.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -12,26 +13,20 @@ namespace sistema_fichas.WebApi.Controllers
 {
     public class PedidoController : ApiController
     {
+        IPedidoService _PedidoService;
 
-        FichasContext _db = new FichasContext();
+        public PedidoController(IPedidoService PedidoService)
+        {
+            _PedidoService = PedidoService;
+        }
 
         public IList<PedidoConDetalles> Get()
         {
-            _db.Configuration.LazyLoadingEnabled = false;
-            _db.Configuration.ProxyCreationEnabled = false;
-
-            IEnumerable<Pedido> pedidos = _db.Pedidos
-                .Where(x => x.EstadoPedido.Estado == 5)
-                .Include(x => x.PedidosDetalle)
-                .Include(x => x.Cliente)
-                .Include(x => x.UserProfile)
-                .Include(x => x.EstadoPedido)
-                .ToList();
-
+            var pedidos = _PedidoService.GetAllByCriteria(null, null, true).ToList().Where(x => x.EstadoPedido.Estado == 5);
             List<PedidoConDetalles> pedidosConDetalles = new List<PedidoConDetalles>();
             pedidosConDetalles.Clear();
 
-            
+
             foreach (Pedido p in pedidos)
             {
                 PedidoConDetalles pedidoConDetalle = new PedidoConDetalles();
@@ -60,18 +55,19 @@ namespace sistema_fichas.WebApi.Controllers
 
                         Actividad_ID = Convert.ToInt32(x.ID),
                         Actividad_Cantidad = x.Cantidad.Value,
-                        //Actividad_Nombre = x.Catalogo.Nombre,
+                        Actividad_Nombre = x.Catalogo.Nombre,
                         Actividad_Fecha = x.FechaInicio.Value,
                         Estado_ID = x.EstadoDetalle_ID,
-                        //Estado_Nombre = x.EstadoDetalle.Nombre,
+                        Estado_Nombre = x.EstadoDetalle.Nombre,
                         Moneda_ID = x.Moneda_ID,
-                        //Moneda_Alias = x.Moneda.Alias
+                        Moneda_Alias = x.Moneda.Alias
 
 
                     }).ToList();
 
                 }
-                else {
+                else
+                {
                     pedidoConDetalle.Pedido_actividades = null;
                 }
                 pedidosConDetalles.Add(pedidoConDetalle);
@@ -80,39 +76,25 @@ namespace sistema_fichas.WebApi.Controllers
             return pedidosConDetalles.ToList();
         }
 
-        public Pedido Get(int id)
+        // GET api/pedido/5
+        public string Get(int id)
         {
-            Pedido pedido = _db.Pedidos.Find(id);
-            return pedido;
+            return "value";
         }
 
-        public void Post(Pedido pedido)
+        // POST api/pedido
+        public void Post([FromBody]string value)
         {
-            if (ModelState.IsValid) 
-            {
-                _db.Pedidos.Add(pedido);
-                _db.SaveChanges();
-            }
-
         }
 
-        public void Put(int id, int estadoPedido)
+        // PUT api/pedido/5
+        public void Put(int id, [FromBody]string value)
         {
-
-            
-            if (estadoPedido != null) 
-            {
-                Pedido pedido = _db.Pedidos.Find(id);
-                pedido.EstadoPedido_ID = estadoPedido;
-                _db.Entry(pedido).State = EntityState.Modified;
-                _db.SaveChanges();
-            }
         }
 
-        // DELETE api/values/5
+        // DELETE api/pedido/5
         public void Delete(int id)
         {
-
         }
     }
 }

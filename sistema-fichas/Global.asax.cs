@@ -36,11 +36,15 @@ namespace sistema_fichas
 
             //Autofac Configuration
             var builder = new Autofac.ContainerBuilder();
+            
+            //Register controllers
             builder.RegisterControllers(typeof(MvcApplication).Assembly).PropertiesAutowired();
+
             builder.RegisterModule(new RepositoryModule());
             builder.RegisterModule(new ServiceModule());
             builder.RegisterModule(new EFModule());
             var container = builder.Build();
+            
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
 

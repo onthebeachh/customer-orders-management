@@ -18,3 +18,7 @@ C:\Samtech\sistema-fichas\sistema-fichas.Business\obj\Debug\sistema_fichas.Busin
 C:\Samtech\sistema-fichas\sistema-fichas.Business\obj\Debug\sistema-fichas.Business.csproj.GenerateResource.Cache
 C:\Samtech\sistema-fichas\sistema-fichas.Business\obj\Debug\sistema-fichas.Business.dll
 C:\Samtech\sistema-fichas\sistema-fichas.Business\obj\Debug\sistema-fichas.Business.pdb
+C:\Samtech\sistema-fichas\sistema-fichas.Business\obj\Debug\sistema_fichas.Business.Migrations.UpdatePedidoDetalleCatalogoMigration.resources
+C:\Samtech\sistema-fichas\sistema-fichas.Business\obj\Debug\sistema_fichas.Business.Migrations.AddDefaultValueToValorBaseMigration.resources
+C:\Samtech\sistema-fichas\sistema-fichas.Business\obj\Debug\sistema_fichas.Business.Migrations.ChangeTypeIntToDoubleMigration.resources
+C:\Samtech\sistema-fichas\sistema-fichas.Business\obj\Debug\sistema_fichas.Business.Migrations.AddValorBaseUFValorBaseCLPMigration.resources
