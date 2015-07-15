@@ -215,6 +215,7 @@
     <Compile Include="Controllers\ContactoController.cs" />
     <Compile Include="Controllers\DireccionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OperacionesController.cs" />
     <Compile Include="Controllers\PedidoController.cs" />
     <Compile Include="Controllers\ReporteController.cs" />
     <Compile Include="Controllers\SistemaFichasController.cs" />
@@ -452,6 +453,8 @@
     <Content Include="Views\Pedido\_ActividadesList.cshtml" />
     <Content Include="Views\Pedido\_AgregarActividad.cshtml" />
     <Content Include="Views\Pedido\_VerPedidoDetalle.cshtml" />
+    <Content Include="Views\Operaciones\Index.cshtml" />
+    <Content Include="Views\Pedido\Operaciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

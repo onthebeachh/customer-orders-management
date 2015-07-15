@@ -11,6 +11,7 @@ namespace sistema_fichas.Service.Core
     {
         Pedido GetById(int Id);
         IEnumerable<Pedido> GetAllByClienteId(int Id, bool? OnlyActive = true);
+        IEnumerable<Pedido> GetAllOperaciones(string criteria, bool? OnlyActives = true); 
         IEnumerable<Pedido> GetAllByCriteria(string searchCriteria, string ContactoAttribute, bool? OnlyActives = true);
     }
 }

@@ -28,6 +28,8 @@ namespace sistema_fichas.Service
         
         }
 
+     
+
         public IEnumerable<PedidoDetalle> GetAllByClienteId(long Cliente_ID, bool? OnlyActives = true) 
         {
             if(OnlyActives.Value.Equals(true)){

@@ -13,5 +13,6 @@ namespace sistema_fichas.Repository.Core
         IEnumerable<Pedido> GetAllByClienteId(int Id, bool? OnlyActive = true);
         IEnumerable<Pedido> GetAllByCriteria(string searchCriteria, string ContactoAttribute);
         IEnumerable<Pedido> GetAll(bool? OnlyActives);
+        IEnumerable<Pedido> GetAllOperaciones(string criteria, bool? OnlyActives);
     }
 }

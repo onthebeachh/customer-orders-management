@@ -11,5 +11,6 @@ namespace sistema_fichas.Service.Core
     {
         Cliente GetById(long Id);
         IEnumerable<Cliente> GetAllByCriteria(string searchCriteria, string ContactoAttribute, bool? OnlyActives = true);
+        IEnumerable<Cliente> GetAllWithPedidos(int? EstadoPedido);
     }
 }

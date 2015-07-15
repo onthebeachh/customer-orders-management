@@ -48,7 +48,12 @@ namespace sistema_fichas.Controllers
 
         public ActionResult Index(string busqueda, string tipo_filtro)
         {
-            return View(_PedidoService.GetAllByCriteria(busqueda, tipo_filtro, false).ToList());
+            return View(_PedidoService.GetAllByCriteria(busqueda, tipo_filtro, true).ToList());
+        }
+
+        public ActionResult Operaciones(string busqueda) 
+        {
+            return View(_PedidoService.GetAllOperaciones(busqueda, true).ToList());
         }
 
         public ActionResult Create(int ClienteID)

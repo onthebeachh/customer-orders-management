@@ -36,29 +36,11 @@
                                 <a href="@Url.Action("Index","Cliente")"><i class="fa fa-users"></i> Clientes</a>
                             </li>
                             <li class="">
-                                <a href="@Url.Action("Index","Contacto")">
-                                    <i class="fa fa-fax"></i> Contactos
-                                </a>
-                            </li>
-                            <li class="">
                                 <a href="@Url.Action("Index","Pedido")">
                                     <i class="fa fa-shopping-cart"></i> Pedidos
                                 </a>
                             </li>
-                            <li class="dropdown">
-                                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa fa-list-alt"></i> Reportes <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="@Url.Action("Cliente","Reporte")">Reporte clientes</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"> Reporte pedidos</a>
-                                    </li>
-
-                                </ul>
-                            </li>
+                            
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
@@ -94,11 +76,24 @@
 </div>
 </div>
 </nav>
-<div class="container">
+<div class="">
     <div class="" style="margin-top:70px">
         @RenderSection("featured", required: false)
         <section class="content-wrapper main-content clear-fix">
-        @RenderBody()
+        <div class="row-fluid">
+            <div class="col-xs-12">
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-home"></i> Inicio </a></li>
+                    <li><a href="#">@System.Web.HttpContext.Current.Request.RequestContext.RouteData.GetRequiredString("controller")</a></li>
+                    <li class="active">@System.Web.HttpContext.Current.Request.RequestContext.RouteData.GetRequiredString("action")</li>
+                </ol>
+            </div>
+            <div class=" col-xs-12">
+                @RenderBody()
+            </div>
+            
+        </div>
+            
         </section>
         <!-- Begin Modal -->
         <div class="modal" id="modal_contenido" tabindex="-1" role="dialog" aria-labelledby="modal_label" aria-hidden="true">

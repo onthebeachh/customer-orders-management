@@ -14,28 +14,27 @@ namespace sistema_fichas.WebApi.Controllers
     public class PedidoController : ApiController
     {
         IPedidoService _PedidoService;
+        IPedidoDetalleService _PedidoDetalleService;
+        IClienteService _ClienteService;
 
-        public PedidoController(IPedidoService PedidoService)
+        public PedidoController(IPedidoService PedidoService, IClienteService ClienteService, IPedidoDetalleService PedidoDetalleService)
         {
             _PedidoService = PedidoService;
+            _ClienteService = ClienteService;
+            _PedidoDetalleService = PedidoDetalleService;
         }
 
         public IList<PedidoConDetalles> Get()
         {
             var pedidos = _PedidoService.GetAllByCriteria(null, null, true).ToList().Where(x => x.EstadoPedido.Estado == 5);
-            List<PedidoConDetalles> pedidosConDetalles = new List<PedidoConDetalles>();
+            IList<PedidoConDetalles> pedidosConDetalles = new List<PedidoConDetalles>();
             pedidosConDetalles.Clear();
-
 
             foreach (Pedido p in pedidos)
             {
                 PedidoConDetalles pedidoConDetalle = new PedidoConDetalles();
                 pedidoConDetalle.Pedido_ID = p.ID;
                 pedidoConDetalle.Pedido_FechaInicio = p.FechaInicio.Value;
-                pedidoConDetalle.Cliente_ID = p.Cliente_ID;
-                pedidoConDetalle.Cliente_NombreFantasia = p.Cliente.NombreFantasia;
-                pedidoConDetalle.Cliente_RazonSocial = p.Cliente.RazonSocial;
-                pedidoConDetalle.Cliente_RUT = p.Cliente.Rut;
 
                 pedidoConDetalle.Estado_ID = p.EstadoPedido_ID.Value;
                 pedidoConDetalle.Estado_Codigo = p.EstadoPedido.Estado;
@@ -49,17 +48,15 @@ namespace sistema_fichas.WebApi.Controllers
 
                 if (actividades.Count > 0)
                 {
-                    pedidoConDetalle.Pedido_actividades = new List<ActividadSimple>();
-                    pedidoConDetalle.Pedido_actividades = actividades.Select(x => new ActividadSimple
+                    pedidoConDetalle.Actividades = new List<ActividadDetalleDTO>();
+                    pedidoConDetalle.Actividades = actividades.Select(x => new ActividadDetalleDTO
                     {
 
                         Actividad_ID = Convert.ToInt32(x.ID),
                         Actividad_Cantidad = x.Cantidad.Value,
                         Actividad_Nombre = x.Catalogo.Nombre,
                         Actividad_Fecha = x.FechaInicio.Value,
-                        Estado_ID = x.EstadoDetalle_ID,
                         Estado_Nombre = x.EstadoDetalle.Nombre,
-                        Moneda_ID = x.Moneda_ID,
                         Moneda_Alias = x.Moneda.Alias
 
 
@@ -68,7 +65,7 @@ namespace sistema_fichas.WebApi.Controllers
                 }
                 else
                 {
-                    pedidoConDetalle.Pedido_actividades = null;
+                    pedidoConDetalle.Actividades = null;
                 }
                 pedidosConDetalles.Add(pedidoConDetalle);
             }
@@ -77,9 +74,18 @@ namespace sistema_fichas.WebApi.Controllers
         }
 
         // GET api/pedido/5
-        public string Get(int id)
+        public IList<ActividadDTO> Get(int id)
         {
-            return "value";
+            var actividades = _PedidoDetalleService.GetPedidosDetalleActividad(id).ToList().Where(x => x.Pedido.EstadoPedido.Estado == 5);
+            IList<ActividadDTO> actividadesDTO = new List<ActividadDTO>();
+            foreach (PedidoDetalle a in actividades)
+            {
+                ActividadDTO actividad = new ActividadDTO();
+                actividad.ID = a.ID;
+                actividad.Nombre = a.Catalogo.Nombre;
+                actividadesDTO.Add(actividad);
+            }
+            return actividadesDTO;
         }
 
         // POST api/pedido

@@ -21,7 +21,6 @@ namespace sistema_fichas.Controllers
             base.OnActionExecuting(filterContext);
             try
             {
-                if(Request.Url.LocalPath != "/Pedido/api")
                     Permisos(Request.Url.LocalPath);
             }
             catch (Exception e)

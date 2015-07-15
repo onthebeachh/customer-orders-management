@@ -25,3 +25,14 @@
                 <div class=""><p class="">Control »</p></div>
             </div>    
         </div>
+
+
+
+<script>
+    $(document).ready(function () {
+        $.getJSON('http://control.samtech.cl/WebApi/api/Pedido', function (data) {
+            console.log(data)
+        });
+    });
+
+</script>

@@ -12,5 +12,6 @@ namespace sistema_fichas.Repository.Core
         Cliente GetById(long id);
         IEnumerable<Cliente> GetAll(bool? OnlyActive);
         IEnumerable<Cliente> GetAllByCriteria(string attributeName, string attributeValue);
+        IEnumerable<Cliente> GetAllWithPedidos(int EstadoPedido);
     }
 }

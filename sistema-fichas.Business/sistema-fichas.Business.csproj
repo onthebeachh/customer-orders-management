@@ -106,9 +106,14 @@
     <Compile Include="Migrations\201506261824133_AddValorBaseUFValorBaseCLPMigration.Designer.cs">
       <DependentUpon>201506261824133_AddValorBaseUFValorBaseCLPMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201507141550103_AddStatusToAllClases.cs" />
+    <Compile Include="Migrations\201507141550103_AddStatusToAllClases.Designer.cs">
+      <DependentUpon>201507141550103_AddStatusToAllClases.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modalidad.cs" />
     <Compile Include="Moneda.cs" />
+    <Compile Include="OrdenTrabajo.cs" />
     <Compile Include="Pedido.cs" />
     <Compile Include="PedidoDetalle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -157,6 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201506261824133_AddValorBaseUFValorBaseCLPMigration.resx">
       <DependentUpon>201506261824133_AddValorBaseUFValorBaseCLPMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507141550103_AddStatusToAllClases.resx">
+      <DependentUpon>201507141550103_AddStatusToAllClases.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

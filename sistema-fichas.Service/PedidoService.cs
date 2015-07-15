@@ -38,6 +38,11 @@ namespace sistema_fichas.Service
             return resultado;
         }
 
+        public IEnumerable<Pedido> GetAllOperaciones(string criteria, bool? OnlyActives = true) 
+        {
+            return _pedidoRepository.GetAllOperaciones(criteria, OnlyActives.Value);
+            
+        }
 
     }
 }

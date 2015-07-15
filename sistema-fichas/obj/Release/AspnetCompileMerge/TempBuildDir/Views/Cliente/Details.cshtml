@@ -12,9 +12,9 @@
 <link href="~/Content/bootstrap-switch/bootstrap3/bootstrap-switch.css" rel="stylesheet">
 <script src="~/Scripts/bootstrap-switch.js"></script>
 
-<div class="row">
+<div class="row-fluid">
     
-        <h2>Detalle</h2>
+        <h1 class="text-center">@Html.DisplayFor(model => model.cliente.NombreFantasia) - C&oacute;digo # @Html.DisplayFor(model => model.cliente.ID) </h1>
     <div id="cliente_detalle">
         <div class="col-xs-12 col-md-6">
             <dl class="dl-horizontal">
@@ -184,7 +184,7 @@
                                                 <tr data-row-id="@item.ID">
                                                     <td class="text-center">@(i++)</td>
                                                     <td class="text-center">@Html.DisplayFor(modelItem => item.ID)</td>
-                                                    <td class="text-center">@item.FechaInicio.Value.ToString(" dd MMMM yyyy").ToUpperInvariant()</td>
+                                                    <td class="text-center">@Html.DisplayFor(modelItem => item.FechaInicio)</td>
                                                     <td class="text-center">@Html.DisplayFor(modelItem => item.UserProfile.UserName)</td>
                                                     <td class="">
                                                         <div class="row">

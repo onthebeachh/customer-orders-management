@@ -39,5 +39,11 @@ namespace sistema_fichas.Repository
         {
             return FindBy(x => x.Cliente.NombreFantasia.Contains(attributeValue) || x.UserProfile.UserName.Contains(attributeValue) || x.Cliente.Rut.Contains(attributeValue));
         }
+
+        public IEnumerable<Pedido> GetAllOperaciones(string criteria, bool? OnlyActives)
+        {
+            return FindBy(x => (x.EstadoPedido.Estado == 3 || x.EstadoPedido.Estado == 5 || x.EstadoPedido.Estado == 6) /*&& (x.Cliente.NombreFantasia.Contains(criteria) || x.UserProfile.UserName.Contains(criteria) || x.Cliente.Rut.Contains(criteria))*/);
+        }
+
     }
 }

@@ -12,5 +12,6 @@ namespace sistema_fichas.Business
     public interface IEntity<T>
     {
         T ID { get; set; }
+        Boolean Status { get; set; }
     }
 }

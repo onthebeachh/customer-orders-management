@@ -1,0 +1,69 @@
+﻿@model IEnumerable<sistema_fichas.Business.Pedido>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaTermino)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Facturado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cliente_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserProfile_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EstadoPedido_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaInicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaTermino)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Facturado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cliente_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserProfile_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EstadoPedido_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

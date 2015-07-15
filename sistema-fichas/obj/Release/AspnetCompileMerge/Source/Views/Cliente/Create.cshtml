@@ -16,9 +16,7 @@
             @Html.ValidationSummary(true)
             <div class="col-md-12">
                 <div class="row">
-                    <div class="form-group">
                         <h5 class="text-info text-left">Datos Empresa</h5>
-                    </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             @Html.LabelFor(model => model.cliente.RazonSocial, new { @class = "control-label col-md-4" })
@@ -77,9 +75,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group">
                         <h5 class="text-info text-left">Dirección comercial</h5>
-                    </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             @Html.LabelFor(model => model.Direccion.Calle, new { @class = "control-label col-md-4" })

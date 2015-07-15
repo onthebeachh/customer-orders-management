@@ -31,5 +31,10 @@ namespace sistema_fichas.Service
             resultado = (String.IsNullOrEmpty(searchCriteria)) ? _clienteRepository.GetAll(OnlyActives.Value) : _clienteRepository.GetAllByCriteria(ContactoAttribute, searchCriteria);
             return resultado;
         }
+
+        public IEnumerable<Cliente> GetAllWithPedidos(int? EstadoPedido = 0)
+        {
+            return _clienteRepository.GetAllWithPedidos(EstadoPedido.Value);
+        }
     }
 }

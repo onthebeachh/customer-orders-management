@@ -28,6 +28,11 @@ namespace sistema_fichas.Repository
                 return GetAll();
         }
 
+        public IEnumerable<Cliente> GetAllWithPedidos(int EstadoPedido)
+        {
+            return FindBy(x => x.Pedidos.FirstOrDefault().EstadoPedido.Estado == EstadoPedido && x.Pedidos.Count > 0);
+        }
+
         public IEnumerable<Cliente> GetAllByCriteria(string attributeName, string attributeValue)
         {
             return FindBy(x => x.NombreFantasia.Contains(attributeValue) || x.RazonSocial.Contains(attributeValue) || x.Rut.Contains(attributeValue) || x.Usuario.UserName.Contains(attributeValue));

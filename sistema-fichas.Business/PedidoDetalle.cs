@@ -20,6 +20,10 @@ namespace sistema_fichas.Business
 
     public class PedidoDetalle : AuditableEntity<long>
     {
+        public PedidoDetalle()
+        {
+            this.FechaInicio = DateTime.Now;
+        }
 
         [DisplayName("Cantidad")]
         public int? Cantidad { get; set; }
