@@ -7,7 +7,7 @@
 </div>
 
 <div id="div_btn_estado_editar_pedido">
-     @(Html.Partial("~/Views/Pedido/_BotonesPedidoDetalle.cshtml", Model.Pedido).If(AuthorizationHelper.isAdministradorComercial(User)))
+     @(Html.Partial("~/Views/Pedido/_BotonesPedidoDetalle.cshtml", Model.Pedido))
 </div>
   
 <div id="div_detalle"  class="col-xs-12 col-md-12">
@@ -17,12 +17,14 @@
         @(Html.Partial("~/Views/Pedido/_ServiciosList.cshtml", Model.ServiciosActivos))
         
     </div>
+    @if (PedidoHelper.esEditable(Model.Pedido.EstadoPedido.Estado))
+    {
     <div class="col-xs-12 col-md-12">
             <button class="btn btn-primary btn-sm pull-right" id="agregar_detalle" data-toggle="modal" data-target="#modal_contenido" data-url="@(Url.Action("AgregarServicio", "Pedido"))" data-id="@Model.Pedido.ID" data-type="servicio">
                 <span class="fa fa-gears"></span> Agregar Servicio
             </button>
     </div>
-
+    }
 </div>
 
 <div id="div_producto" class="col-xs-12 col-md-12">
@@ -30,11 +32,14 @@
     <div id="div_productos">
         @(Html.Partial("~/Views/Pedido/_ProductosList.cshtml", Model.ProductosActivos))
     </div>
+    @if (PedidoHelper.esEditable(Model.Pedido.EstadoPedido.Estado))
+    {
     <div class="col-xs-12 col-md-12">
             <button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#modal_contenido" id="agregar_producto" data-id="@Model.Pedido.ID" data-type="producto">
                 <i class="fa fa-shopping-cart"></i> Agregar Producto
             </button>
     </div>
+    }
 </div>
 
 
@@ -43,11 +48,16 @@
     <div id="div_actividades">
         @(Html.Partial("~/Views/Pedido/_ActividadesList.cshtml", Model.ActividadesActivas))
     </div>
-    <div class="col-xs-12 col-md-12">
-        <button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#modal_contenido" id="agregar_actividad" data-id="@Model.Pedido.ID" data-type="actividad">
-            <i class="fa fa-tags"></i> Agregar Actividad
-        </button>
-    </div>
+    
+    @if (PedidoHelper.esEditable(Model.Pedido.EstadoPedido.Estado))
+    {
+        <div class="col-xs-12 col-md-12">
+            <button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#modal_contenido" id="agregar_actividad" data-id="@Model.Pedido.ID" data-type="actividad">
+                <i class="fa fa-tags"></i> Agregar Actividad
+            </button>
+        </div>
+    }
+    
 </div>
 
 
@@ -56,11 +66,14 @@
     <div id="div_herramientas">
         @(Html.Partial("~/Views/Pedido/_HerramientaList.cshtml", Model.HerramientasActivas))
     </div>
-    <div class="col-xs-12 col-md-12">
-            <button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#modal_contenido" id="agregar_herramienta" data-id="@Model.Pedido.ID" data-type="herramienta">
-                <i class="fa fa-wrench"></i> Agregar herramienta
-            </button>
-    </div>
+    @if (PedidoHelper.esEditable(Model.Pedido.EstadoPedido.Estado))
+    {
+        <div class="col-xs-12 col-md-12">
+                <button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#modal_contenido" id="agregar_herramienta" data-id="@Model.Pedido.ID" data-type="herramienta">
+                    <i class="fa fa-wrench"></i> Agregar herramienta
+                </button>
+        </div>
+    }
 </div>
 
 <div id="div_adjunto" class="col-xs-12 col-md-12">
@@ -68,11 +81,14 @@
     <div id="div_adjuntos">
         @(Html.Partial("~/Views/Pedido/_AdjuntoList.cshtml", Model.AdjuntosActivos))
     </div>
+    @if (PedidoHelper.esEditable(Model.Pedido.EstadoPedido.Estado))
+    {
     <div class="col-xs-12 col-md-12">
             <button data-toggle="modal" data-target="#modal_contenido" id="agregar_adjunto" class="btn btn-primary btn-sm pull-right" data-id="@Model.Pedido.ID" data-type="adjunto" type="button">
                 <i class="fa fa-file-o"></i> Agregar Adjunto
             </button>
     </div>
+    }
 </div>
 
 @section Scripts{

@@ -3,7 +3,7 @@
 
 <div class="col-xs-12 col-md-12">
     <div class="form-group pull-right">
-        @if (Model.EstadoPedido.Estado == 1 || Model.EstadoPedido.Estado == 4)
+        @if (PedidoHelper.esEditable(Model.EstadoPedido.Estado))
         {
            
             <a href="#" id="editar_pedido" data-toggle="modal" data-target="#modal_contenido" data-id="@Model.ID">
@@ -15,10 +15,10 @@
             </a>
 
         }
-        else if (Model.EstadoPedido.Estado == 2)
+        else if (PedidoHelper.esEvaluable(Model.EstadoPedido.Estado))
         {
             <a href="#" class="cambiar_estado" data-id="@Model.ID" data-text="rechazar" data-action="4">
-                @Html.BSbutton("warning btn-sm", "Rechazar pedido", "ban")
+                @Html.BSbutton("warning btn-sm", "Rechazar pedido", "ban").If(true)
             </a>
             <a href="#" class="cambiar_estado" data-id="@Model.ID" data-text="aceptar" data-action="3">
                 @Html.BSbutton("success btn-sm ", "Aceptar pedido", "check")
@@ -27,7 +27,7 @@
         }
 
 
-        @if (Model.EstadoPedido.Estado == 0)
+        @if (PedidoHelper.esAnulado(Model.EstadoPedido.Estado))
         {
 
             <button class="btn btn-success btn-sm cambiar_estado" data-id="@Model.ID" data-text="activar" data-action="1">
@@ -35,8 +35,10 @@
             </button>
 
         }
-        else
+        
+        @if (PedidoHelper.EstadoAnulable(Model.EstadoPedido.Estado))
         {
+            
                 <button class="btn btn-danger btn-sm cambiar_estado" data-id="@Model.ID" data-text="anular" data-action="0">
                     <span class="fa fa-check"></span> Anular Pedido
                 </button>

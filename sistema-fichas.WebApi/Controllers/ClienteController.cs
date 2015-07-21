@@ -44,7 +44,7 @@ namespace sistema_fichas.WebApi.Controllers
         // TODOS LOS PEDIDOS DE UN CLIENTE SEGUN ID CLIENTE
         public IList<PedidoDTO> Get(int id)
         {
-            IEnumerable<Pedido> pedidos = _PedidoService.GetAllByClienteId(id, true).ToList();
+            IEnumerable<Pedido> pedidos = _PedidoService.GetAllByClienteId(id, true).ToList().Where(x => x.PedidosDetalle.Count > 0 && x.EstadoPedido.Estado == TipoEstadoPedido.Aprobado_Operaciones.GetHashCode());
             IList<PedidoDTO> pedidosDTO = new List<PedidoDTO>();
             
             foreach(Pedido p in pedidos)

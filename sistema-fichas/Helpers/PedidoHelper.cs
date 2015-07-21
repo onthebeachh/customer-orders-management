@@ -31,11 +31,49 @@ namespace sistema_fichas.Helpers
                 });
             var select_mixed = select_customFilters.Concat(select_properties);
             return new SelectList(select_mixed,"Value","Text");
-        }        
-    
-        public static bool esValido(int pedido)
+        }
+
+        public static bool esActivoEditable(int EstadoDetalle, int EstadoPedido) {
+            var editable = esEditable(EstadoPedido);
+            var activo = esActivo(EstadoDetalle);
+            return (esEditable(EstadoPedido) && esActivo(EstadoDetalle)) ? true : false;
+        }
+
+        //Condiciones: Para que sea un estado anulable, tiene que ser Ingresado, Revision, Aprobado/Rechazado por comercial.
+        //estas condiciones son validas inicialmente para el área comercial.
+        public static bool EstadoAnulable(int EstadoPedido) {
+            return (
+                EstadoPedido == TipoEstadoPedido.Ingresado.GetHashCode() ||
+                EstadoPedido == TipoEstadoPedido.Revision.GetHashCode() ||
+                EstadoPedido == TipoEstadoPedido.Aprobado_Comercial.GetHashCode() ||
+                EstadoPedido == TipoEstadoPedido.Rechazado_Comercial.GetHashCode()) ? true : false;
+        }
+
+        //Condiciones:
+        //El Detalle debe estar en estado activo. Si esta en estado agendado no puede ser modificado, puesto que
+        //se encuentra en transicion de estados en el área de operaciones.
+        public static bool esActivo(int detalle)
         {
-            return (pedido == TipoEstadoPedido.Inactivo.GetHashCode()) ? true : false;
+            return (detalle == TipoEstadoDetalle.Activo.GetHashCode()) ? true : false;
+        }
+
+        public static bool esEvaluable(int pedido)
+        {
+            return (pedido == TipoEstadoPedido.Revision.GetHashCode()) ? true : false;
+        }
+
+        public static bool esAnulado(int detalle)
+        {
+            return (detalle == TipoEstadoDetalle.Inactivo.GetHashCode()) ? true : false;
+        }
+
+        //Condiciones
+        //El pedido se debe encontrar en un estado Ingresado o  rechazado por comercial
+        public static bool esEditable(int pedido)
+        {
+            return (
+                pedido == TipoEstadoPedido.Ingresado.GetHashCode() || 
+                pedido == TipoEstadoPedido.Rechazado_Comercial.GetHashCode()) ? true : false;
         }
     }
 }

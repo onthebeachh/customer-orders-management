@@ -10,45 +10,30 @@ namespace sistema_fichas.Helpers
     {
         public static bool isAdministrador(IPrincipal User) 
         {
-            if (User.IsInRole("Administrador"))
-            {
-                return true;
-            }
-            
-            return false;
+            return (User.IsInRole("Administrador")) ? true : false;
         }
         
         public static bool isGerencia(IPrincipal User)
         {
             isAdministrador(User);
-            if (User.IsInRole("Gerencia"))
-            {
-                return true;
-            }
-
-            return false;
+            return (User.IsInRole("Gerencia")) ? true : false;
         }
 
         public static bool isAdministradorComercial(IPrincipal User)
         {
             isGerencia(User);
-            if (User.IsInRole("Administrador Comercial"))
-            {
-                return true;
-            }
-            
-            return false;
+            return (User.IsInRole("Administrador Comercial")) ? true : false;
         }
 
         public static bool isEjecutivoCuenta(IPrincipal User)
         {
             isAdministradorComercial(User);
-            if (User.IsInRole("Ejecutivo Comercial"))
-            {
-                return true;
-            }
-            return false;
+            return (User.IsInRole("Ejecutivo Comercial")) ? true : false;
         }
 
+        public static bool puedeAnular(IPrincipal User, bool isOwner)
+        {
+            return (isAdministradorComercial(User) || isOwner) ? true : false;
+        }
     }
 }

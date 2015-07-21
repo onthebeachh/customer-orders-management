@@ -124,7 +124,7 @@ namespace sistema_fichas.Controllers
                 }
 
                 PedidoVM.Pedido = pedido;
-                PedidoVM.PedidosDetalles = PedidoVM.Pedido.PedidosDetalle.Where(s => s.EstadoDetalle.Estado == 1) as IEnumerable<PedidoDetalle>;
+                PedidoVM.PedidosDetalles = PedidoVM.Pedido.PedidosDetalle.Where(s => s.EstadoDetalle.Estado != TipoEstadoDetalle.Inactivo.GetHashCode()) as IEnumerable<PedidoDetalle>;
                 return View(PedidoVM);
             
             }catch(Exception e){
@@ -136,8 +136,7 @@ namespace sistema_fichas.Controllers
         private Boolean ValidarEstado(int Estado_ID) {
 
             int pedido = _PedidoService.GetById(Estado_ID).EstadoPedido.Estado;
-            if (PedidoHelper.esValido(pedido))
-                return true;
+           
             
             return false;
         }
@@ -437,6 +436,9 @@ namespace sistema_fichas.Controllers
 
             try
             {
+                //if(!_PedidoService.IsEditable(PedidoDetalle.Pedido_ID))
+                //    throw new Exception("Detalle: Este pedido ya no puede ser actualizado"); 
+
                 if (ModelState.IsValid)
                 {
                     int EstadoDetalle_ID = _EstadoDetalleService.GetIdEstadoInicial();
