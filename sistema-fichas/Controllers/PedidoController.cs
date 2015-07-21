@@ -10,6 +10,7 @@ using sistema_fichas.Filters;
 using sistema_fichas.Business;
 using sistema_fichas.ViewModels;
 using sistema_fichas.Service.Core;
+using sistema_fichas.Helpers;
 
 
 
@@ -132,25 +133,42 @@ namespace sistema_fichas.Controllers
             
         }
 
+        private Boolean ValidarEstado(int Estado_ID) {
+
+            int pedido = _PedidoService.GetById(Estado_ID).EstadoPedido.Estado;
+            if (PedidoHelper.esValido(pedido))
+                return true;
+            
+            return false;
+        }
+
         public ActionResult AgregarServicio(int PedidoID)
         {
             PedidoViewModel PedidoVM = new PedidoViewModel();
             DateTime fecha = DateTime.Now;
             DateTime fecha_fin = fecha.AddMonths(6);
-
-            PedidoVM.Productos = _CatalogoService.GetAllByType(TipoPedidoDetalle.Servicio.GetHashCode());
-            PedidoVM.Monedas = _MonedaService.GetAll();
-
-            if (Request.IsAjaxRequest())
+            try
             {
-                PedidoVM.PedidoDetalle.Pedido_ID = PedidoID;
-                PedidoVM.PedidoDetalle.FechaInicio = fecha;
-                PedidoVM.PedidoDetalle.FechaTermino = fecha_fin;
+                PedidoVM.Productos = _CatalogoService.GetAllByType(TipoPedidoDetalle.Servicio.GetHashCode());
+                PedidoVM.Monedas = _MonedaService.GetAll();
 
-                PedidoVM.PedidoDetalle.Tipo = TipoPedidoDetalle.Servicio.GetHashCode();
+                if (Request.IsAjaxRequest())
+                {
+                    PedidoVM.PedidoDetalle.Pedido_ID = PedidoID;
+                    PedidoVM.PedidoDetalle.FechaInicio = fecha;
+                    PedidoVM.PedidoDetalle.FechaTermino = fecha_fin;
+
+                    PedidoVM.PedidoDetalle.Tipo = TipoPedidoDetalle.Servicio.GetHashCode();
+                    return PartialView("_AgregarServicio", PedidoVM);
+                }
+                return View();
+            }
+            catch (Exception e)
+            {
                 return PartialView("_AgregarServicio", PedidoVM);
             }
-            return View();
+
+            
         }
 
         public ActionResult AgregarAdjunto(int PedidoID)

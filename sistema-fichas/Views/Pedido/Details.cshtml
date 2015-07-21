@@ -7,7 +7,7 @@
 </div>
 
 <div id="div_btn_estado_editar_pedido">
-     @(Html.Partial("~/Views/Pedido/_BotonesPedidoDetalle.cshtml", Model.Pedido))
+     @(Html.Partial("~/Views/Pedido/_BotonesPedidoDetalle.cshtml", Model.Pedido).If(AuthorizationHelper.isAdministradorComercial(User)))
 </div>
   
 <div id="div_detalle"  class="col-xs-12 col-md-12">

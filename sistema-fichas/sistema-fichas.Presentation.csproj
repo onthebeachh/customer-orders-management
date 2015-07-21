@@ -224,7 +224,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\SessionHelper.cs" />
+    <Compile Include="Helpers\AuthorizationHelper.cs" />
     <Compile Include="Helpers\ToolboxHelperExtension.cs" />
     <Compile Include="Helpers\ClienteHelper.cs" />
     <Compile Include="Helpers\ContactoHelper.cs" />
@@ -455,6 +455,7 @@
     <Content Include="Views\Pedido\_VerPedidoDetalle.cshtml" />
     <Content Include="Views\Operaciones\Index.cshtml" />
     <Content Include="Views\Pedido\Operaciones.cshtml" />
+    <Content Include="Views\Pedido\DetailOperaciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

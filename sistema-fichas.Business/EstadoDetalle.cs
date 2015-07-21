@@ -8,6 +8,16 @@ using System.Threading.Tasks;
 
 namespace sistema_fichas.Business
 {
+    public enum TipoEstadoDetalle
+    {
+        Inactivo = 0,
+        Activo = 1,
+        Agendado = 2,
+        Parcial = 3,
+        Finalizado = 4
+
+    }
+
     public class EstadoDetalle : Entity<int>
     {
         [StringLength(245)]

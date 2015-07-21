@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using sistema_fichas.Business;
 
 namespace sistema_fichas.Helpers
 {
@@ -30,6 +31,11 @@ namespace sistema_fichas.Helpers
                 });
             var select_mixed = select_customFilters.Concat(select_properties);
             return new SelectList(select_mixed,"Value","Text");
+        }        
+    
+        public static bool esValido(int pedido)
+        {
+            return (pedido == TipoEstadoPedido.Inactivo.GetHashCode()) ? true : false;
         }
     }
 }

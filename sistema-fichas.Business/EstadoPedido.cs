@@ -8,6 +8,17 @@ using System.Threading.Tasks;
 
 namespace sistema_fichas.Business
 {
+    public enum TipoEstadoPedido
+    {
+        Inactivo = 0,
+        Ingresado = 1,
+        Revision = 2,
+        Aprobado_Comercial = 3,
+        Rechazado_Comercial = 4,
+        Aprobado_Operaciones = 5,
+        Rechazado_Operaciones = 6
+    }
+
     public class EstadoPedido : Entity<int>
     {
         [StringLength(245)]

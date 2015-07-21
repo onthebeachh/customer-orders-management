@@ -51,10 +51,14 @@ namespace sistema_fichas.Helpers
         public static MvcHtmlString botonEliminar(this HtmlHelper helper, int tipo, string dataId)
         {
             var icon = String.Empty;
-            icon = (SessionHelper.isAdmin()) ? String.Format("<i class='col-xs-offset-1 fa-trash fa borrar_detalle' data-id='{0}' data-type='{1}'></i>", dataId, tipo) : "";
+            icon = String.Format("<i class='col-xs-offset-1 fa-trash fa borrar_detalle' data-id='{0}' data-type='{1}'></i>", dataId, tipo);
             return new MvcHtmlString(icon);
         }
 
-        
+        public static MvcHtmlString If(this MvcHtmlString value, bool authorization)
+        {
+            return authorization ? value : MvcHtmlString.Empty;
+        }
+
     }
 }
