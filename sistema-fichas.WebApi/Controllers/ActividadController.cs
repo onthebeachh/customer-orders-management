@@ -51,8 +51,24 @@ namespace sistema_fichas.WebApi.Controllers
 
 
         // POST api/actividad
-        public void Post([FromBody]string value)
+        public void Post([FromBody] EstadoDTO estado)
         {
+            PedidoDetalle actividad = _PedidoDetalleService.GetById(estado.id);
+            
+            if(estado.estado == TipoEstadoDetalle.Activo.GetHashCode())
+                actividad.EstadoDetalle_ID = 2;
+
+            if (estado.estado == TipoEstadoDetalle.Agendado.GetHashCode())
+                actividad.EstadoDetalle_ID = 3;
+
+            if (estado.estado == TipoEstadoDetalle.Finalizado.GetHashCode())
+                actividad.EstadoDetalle_ID = 5;
+
+            if (estado.estado == TipoEstadoDetalle.Parcial.GetHashCode())
+                actividad.EstadoDetalle_ID = 4;
+            
+            _PedidoDetalleService.Update(actividad);
+
         }
 
         // PUT api/actividad/5

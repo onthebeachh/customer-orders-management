@@ -76,7 +76,7 @@ namespace sistema_fichas.WebApi.Controllers
         // GET api/pedido/5
         public IList<ActividadDTO> Get(int id)
         {
-            var actividades = _PedidoDetalleService.GetPedidosDetalleActividad(id).ToList().Where(x => x.Pedido.EstadoPedido.Estado == TipoEstadoPedido.Aprobado_Operaciones.GetHashCode() && x.EstadoDetalle.Estado == TipoEstadoDetalle.Activo.GetHashCode());
+            var actividades = _PedidoDetalleService.GetPedidosDetalleActividad(id).ToList().Where(x => x.Pedido.EstadoPedido.Estado == TipoEstadoPedido.Aprobado_Operaciones.GetHashCode());
             IList<ActividadDTO> actividadesDTO = new List<ActividadDTO>();
             foreach (PedidoDetalle a in actividades)
             {

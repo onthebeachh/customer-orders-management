@@ -192,6 +192,7 @@
     <Compile Include="ViewModels\ActividadDTO.cs" />
     <Compile Include="ViewModels\ActividadDetalleDTO.cs" />
     <Compile Include="ViewModels\ClienteDTO.cs" />
+    <Compile Include="ViewModels\EstadoDTO.cs" />
     <Compile Include="ViewModels\PedidoDTO.cs" />
     <Compile Include="ViewModels\PedidoConDetalles.cs" />
   </ItemGroup>
