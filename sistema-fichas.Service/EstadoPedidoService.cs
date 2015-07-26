@@ -27,27 +27,31 @@ namespace sistema_fichas.Service
 
         public int GetIdEstadoInicial()
         {
-            return _estadoPedidoRepository.getIdEstado("Ingresado");
+            return _estadoPedidoRepository.getIdEstado(TipoEstadoPedido.Ingresado.GetHashCode());
         }
 
         public int GetIdEstadoInactivo()
         { 
-            return _estadoPedidoRepository.getIdEstado("Inactivo");
+            return _estadoPedidoRepository.getIdEstado(TipoEstadoPedido.Inactivo.GetHashCode());
         }
 
         public int GetIdEstadoRevisionComercial() 
         { 
-            return _estadoPedidoRepository.getIdEstado("Revisión Comercial");
+            return _estadoPedidoRepository.getIdEstado(TipoEstadoPedido.Revision.GetHashCode());
         }
 
         public int GetIdEstadoAprobadoComercial() 
         { 
-            return _estadoPedidoRepository.getIdEstado("Aprobado Comercial");
+            return _estadoPedidoRepository.getIdEstado(TipoEstadoPedido.Aprobado_Comercial.GetHashCode());
         }
 
         public int GetIdEstadoRechazadoComercial() 
         { 
-            return _estadoPedidoRepository.getIdEstado("Rechazado Comercial");
+            return _estadoPedidoRepository.getIdEstado(TipoEstadoPedido.Rechazado_Comercial.GetHashCode());
+        }
+
+        public int GetIdEstado(int Estado_ID) {
+            return _estadoPedidoRepository.getIdEstado(Estado_ID);
         }
     }
 }

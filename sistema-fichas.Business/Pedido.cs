@@ -15,6 +15,7 @@ namespace sistema_fichas.Business
             this.FechaInicio = DateTime.Now;
             this.FechaTermino = DateTime.Now;
             this.Facturado = false;
+            this.PedidosDetalle = new HashSet<PedidoDetalle>();
         }
 
         [DisplayName("Fecha Inicio")]

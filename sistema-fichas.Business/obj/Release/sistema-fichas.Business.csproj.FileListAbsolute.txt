@@ -20,6 +20,7 @@ C:\Samtech\sistema-fichas\sistema-fichas.Business\obj\Release\sistema_fichas.Bus
 C:\Samtech\sistema-fichas\sistema-fichas.Business\obj\Release\sistema_fichas.Business.Migrations.ChangeTypeIntToDoubleMigration.resources
 C:\Samtech\sistema-fichas\sistema-fichas.Business\obj\Release\sistema_fichas.Business.Migrations.AddValorBaseUFValorBaseCLPMigration.resources
 C:\Samtech\sistema-fichas\sistema-fichas.Business\obj\Release\sistema_fichas.Business.Migrations.AddStatusToAllClases.resources
+C:\Samtech\sistema-fichas\sistema-fichas.Business\obj\Release\sistema_fichas.Business.Migrations.UpdatePedidoDetalleAddFinalizado.resources
 C:\Samtech\sistema-fichas\sistema-fichas.Business\obj\Release\sistema-fichas.Business.csproj.GenerateResource.Cache
 C:\Samtech\sistema-fichas\sistema-fichas.Business\obj\Release\sistema-fichas.Business.dll
 C:\Samtech\sistema-fichas\sistema-fichas.Business\obj\Release\sistema-fichas.Business.pdb

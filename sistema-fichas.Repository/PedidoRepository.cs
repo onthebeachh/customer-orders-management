@@ -42,7 +42,15 @@ namespace sistema_fichas.Repository
 
         public IEnumerable<Pedido> GetAllOperaciones(string criteria, bool? OnlyActives)
         {
-            return FindBy(x => (x.EstadoPedido.Estado == 3 || x.EstadoPedido.Estado == 5 || x.EstadoPedido.Estado == 6) /*&& (x.Cliente.NombreFantasia.Contains(criteria) || x.UserProfile.UserName.Contains(criteria) || x.Cliente.Rut.Contains(criteria))*/);
+            int aprobado_comercial = TipoEstadoPedido.Aprobado_Comercial.GetHashCode();
+            int aprobado_operaciones = TipoEstadoPedido.Aprobado_Operaciones.GetHashCode();
+            int rechazado_operaciones = TipoEstadoPedido.Rechazado_Operaciones.GetHashCode();
+
+            return FindBy(x => (
+                x.EstadoPedido.Estado == aprobado_comercial ||
+                x.EstadoPedido.Estado == aprobado_operaciones ||
+                x.EstadoPedido.Estado == rechazado_operaciones
+                ));
         }
 
     }

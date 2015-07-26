@@ -8,7 +8,8 @@
                     @Html.DisplayNameFor(model => model.Pedido_ID)
                 </th>
                 <th class="col-xs-1 text-center">Correlativo</th>
-                <th class="col-xs-1 text-center">Cantidad</th>
+                <th class="col-xs-1 text-center">Cant. Solicitada</th>
+                <th class="col-xs-1 text-center">Cant. Realizada</th>
                 <th class="col-xs-1 text-center">Valor</th>
                 <th class="col-xs-5 text-center">Actividad</th>
                 <th class="col-xs-2 text-center">Fecha</th>
@@ -34,6 +35,7 @@
                         <td class=" text-center"> @item.Pedido_ID </td>
                         <td class=" text-center">@(count++) </td>
                         <td class="text-center"> @Html.DisplayFor(modelItem => item.Cantidad)</td>
+                        <td class="text-center"> @Html.DisplayFor(modelItem => item.Finalizado)</td>
                         <td class="text-right"> @Html.DisplayFor(modelItem => item.Valor) <label class="label label-default">@Html.DisplayFor(modelItem => item.Moneda.Alias)</td>
                         <td class="text-center"> @Html.DisplayFor(modelItem => item.Catalogo.Nombre) </td>
                         <td class="text-center"> @Html.DisplayFor(modelItem => item.FechaInicio)</td>

@@ -454,8 +454,12 @@
     <Content Include="Views\Pedido\_AgregarActividad.cshtml" />
     <Content Include="Views\Pedido\_VerPedidoDetalle.cshtml" />
     <Content Include="Views\Operaciones\Index.cshtml" />
-    <Content Include="Views\Pedido\Operaciones.cshtml" />
-    <Content Include="Views\Pedido\DetailOperaciones.cshtml" />
+    <Content Include="Views\Shared\_Comercial.cshtml" />
+    <Content Include="Views\Shared\_Operaciones.cshtml" />
+    <Content Include="Views\Operaciones\CrearActividad.cshtml" />
+    <Content Include="Views\Operaciones\VerPedido.cshtml" />
+    <Content Include="Views\Operaciones\_AgregarActividad.cshtml" />
+    <Content Include="Views\Operaciones\_BotonesPedidoDetalle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

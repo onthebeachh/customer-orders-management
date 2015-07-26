@@ -35,5 +35,15 @@ namespace sistema_fichas.Helpers
         {
             return (isAdministradorComercial(User) || isOwner) ? true : false;
         }
+
+        public static bool isComercial(IPrincipal User) 
+        {
+            return (User.IsInRole("Ejecutivo Comercial") || User.IsInRole("Administrador Comercial")) ? true : false;
+        }
+
+        public static bool isOperaciones(IPrincipal User)
+        {
+            return (User.IsInRole("Operaciones")) ? true : false;
+        }
     }
 }

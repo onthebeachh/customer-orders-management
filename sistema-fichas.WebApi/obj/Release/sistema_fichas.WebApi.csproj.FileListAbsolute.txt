@@ -1,4 +1,3 @@
-C:\Samtech\sistema-fichas\sistema-fichas.WebApi\obj\Release\sistema_fichas.WebApi.csprojResolveAssemblyReference.cache
 C:\Samtech\sistema-fichas\sistema-fichas.WebApi\bin\sistema_fichas.WebApi.dll.config
 C:\Samtech\sistema-fichas\sistema-fichas.WebApi\bin\sistema_fichas.WebApi.dll
 C:\Samtech\sistema-fichas\sistema-fichas.WebApi\bin\sistema_fichas.WebApi.pdb
@@ -93,5 +92,6 @@ C:\Samtech\sistema-fichas\sistema-fichas.WebApi\bin\ko\System.Spatial.resources.
 C:\Samtech\sistema-fichas\sistema-fichas.WebApi\bin\ru\System.Spatial.resources.dll
 C:\Samtech\sistema-fichas\sistema-fichas.WebApi\bin\zh-Hans\System.Spatial.resources.dll
 C:\Samtech\sistema-fichas\sistema-fichas.WebApi\bin\zh-Hant\System.Spatial.resources.dll
+C:\Samtech\sistema-fichas\sistema-fichas.WebApi\obj\Release\sistema_fichas.WebApi.csprojResolveAssemblyReference.cache
 C:\Samtech\sistema-fichas\sistema-fichas.WebApi\obj\Release\sistema_fichas.WebApi.dll
 C:\Samtech\sistema-fichas\sistema-fichas.WebApi\obj\Release\sistema_fichas.WebApi.pdb

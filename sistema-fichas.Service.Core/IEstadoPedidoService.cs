@@ -10,6 +10,7 @@ namespace sistema_fichas.Service.Core
     public interface IEstadoPedidoService : IEntityService<EstadoPedido>
     {
         EstadoPedido GetById(int Id);
+        int GetIdEstado(int Estado_ID);
         int GetIdEstadoInicial();
         int GetIdEstadoInactivo();
         int GetIdEstadoRevisionComercial();

@@ -27,12 +27,17 @@ namespace sistema_fichas.Service
 
         public int GetIdEstadoInicial()
         {
-            return _estadoDetalleRepository.getIdEstado("Activo");
+            return _estadoDetalleRepository.getIdEstado(TipoEstadoDetalle.Activo.GetHashCode());
         }
 
         public int GetIdEstadoInactivo() 
         {
-            return _estadoDetalleRepository.getIdEstado("Inactivo");
+            return _estadoDetalleRepository.getIdEstado(TipoEstadoDetalle.Inactivo.GetHashCode());
+        }
+
+        public int GetIdEstado(int Estado_ID)
+        {
+            return _estadoDetalleRepository.getIdEstado(Estado_ID);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using sistema_fichas.Filters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,8 @@ namespace sistema_fichas.Controllers
 {
     public class HomeController : Controller
     {
+        [Authorize]
+        [InitializeSimpleMembership]
         public ActionResult Index()
         {
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";

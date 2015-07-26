@@ -110,6 +110,10 @@
     <Compile Include="Migrations\201507141550103_AddStatusToAllClases.Designer.cs">
       <DependentUpon>201507141550103_AddStatusToAllClases.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201507242114289_UpdatePedidoDetalleAddFinalizado.cs" />
+    <Compile Include="Migrations\201507242114289_UpdatePedidoDetalleAddFinalizado.Designer.cs">
+      <DependentUpon>201507242114289_UpdatePedidoDetalleAddFinalizado.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modalidad.cs" />
     <Compile Include="Moneda.cs" />
@@ -165,6 +169,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201507141550103_AddStatusToAllClases.resx">
       <DependentUpon>201507141550103_AddStatusToAllClases.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507242114289_UpdatePedidoDetalleAddFinalizado.resx">
+      <DependentUpon>201507242114289_UpdatePedidoDetalleAddFinalizado.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

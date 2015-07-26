@@ -18,10 +18,24 @@
             <li class="one">
                 <h5>Documentación</h5>
                 Detalle de los verbos disponibles en esta API<p></p>
-                <p><a>@Html.ActionLink("Ver Mas", "Index", "Help", new { area = "" }, null)</a></p>
+                <p>
+                    <a>@Html.ActionLink("Ver Mas", "Index", "Help", new { area = "" }, null)</a>
+                </p>
             </li>
-
-           
         </ol>
     </section>
 </div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                url: "http://localhost:49526/api/Actividad",
+                type: "POST",
+                data: {id: 46, estado: @sistema_fichas.Business.TipoEstadoDetalle.Finalizado.GetHashCode()}
+
+            });
+        })
+
+    </script>
+    }

@@ -52,11 +52,6 @@ namespace sistema_fichas.Controllers
             return View(_PedidoService.GetAllByCriteria(busqueda, tipo_filtro, true).ToList());
         }
 
-        public ActionResult Operaciones(string busqueda) 
-        {
-            return View(_PedidoService.GetAllOperaciones(busqueda, true).ToList());
-        }
-
         public ActionResult Create(int ClienteID)
         {
             try
@@ -568,7 +563,7 @@ namespace sistema_fichas.Controllers
         public ActionResult CambiarEstado(int PedidoID, int Estado)
         {
             String msg_error = "Ocurrio un problema al intentar activar el pedido, por favor intente de nuevo.";
-            String msg_success = "El Pedido ha sido activado exitosamente";
+            String msg_success = "El Pedido ha sido actualizado exitosamente";
             int EstadoID = 1;
 
             try

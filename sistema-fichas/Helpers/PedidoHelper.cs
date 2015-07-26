@@ -75,5 +75,10 @@ namespace sistema_fichas.Helpers
                 pedido == TipoEstadoPedido.Ingresado.GetHashCode() || 
                 pedido == TipoEstadoPedido.Rechazado_Comercial.GetHashCode()) ? true : false;
         }
+
+        public static bool esEditableOperaciones(int pedido)
+        {
+            return (pedido == TipoEstadoPedido.Aprobado_Comercial.GetHashCode()) ? true : false;
+        }
     }
 }

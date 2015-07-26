@@ -23,10 +23,15 @@ namespace sistema_fichas.Business
         public PedidoDetalle()
         {
             this.FechaInicio = DateTime.Now;
+            this.Finalizado = 0;
         }
 
         [DisplayName("Cantidad")]
         public int? Cantidad { get; set; }
+
+        [DisplayName("Finalizado")]
+        [DefaultValue(0)]
+        public int? Finalizado { get; set; }
 
         [DisplayName("Valor")]
         public double? Valor { get; set; }

@@ -18,8 +18,8 @@ namespace sistema_fichas.Repository
             return FindBy(x => x.ID == Id).FirstOrDefault();
         }
 
-        public int getIdEstado(string Estado) {
-            var estado =  FindBy(x => x.Nombre == Estado).FirstOrDefault();
+        public int getIdEstado(int Estado) {
+            var estado =  FindBy(x => x.Estado == Estado).FirstOrDefault();
             return (estado != null) ? estado.ID : 0;
         }
     }

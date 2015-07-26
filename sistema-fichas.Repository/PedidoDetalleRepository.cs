@@ -30,6 +30,7 @@ namespace sistema_fichas.Repository
                     .Include(p => p.Catalogo)
                     .Include(p => p.Moneda)
                     .Include(p => p.EstadoDetalle)
+                    .Include(p => p.Pedido)
                     .Where(pd => pd.Pedido_ID == Pedido_ID && pd.Tipo == TipoPedidoDetalle_ID && pd.EstadoDetalle.Estado != 0).AsEnumerable();
             }
 

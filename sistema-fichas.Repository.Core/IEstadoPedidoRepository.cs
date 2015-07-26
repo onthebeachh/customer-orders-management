@@ -10,6 +10,6 @@ namespace sistema_fichas.Repository.Core
     public interface IEstadoPedidoRepository : IGenericRepository<EstadoPedido>
     {
         EstadoPedido GetById(int Id);
-        int getIdEstado(string Estado);
+        int getIdEstado(int Estado_ID);
     }
 }
