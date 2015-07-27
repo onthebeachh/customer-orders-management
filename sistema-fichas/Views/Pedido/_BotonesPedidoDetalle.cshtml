@@ -15,7 +15,7 @@
             </a>
 
         }
-        else if (PedidoHelper.esEvaluable(Model.EstadoPedido.Estado))
+        else if (PedidoHelper.esEvaluable(Model.EstadoPedido.Estado) && AuthorizationHelper.isAdministradorComercial(User))
         {
             <a href="#" class="cambiar_estado" data-id="@Model.ID" data-text="rechazar" data-action="@sistema_fichas.Business.TipoEstadoPedido.Rechazado_Comercial.GetHashCode()">
                 @Html.BSbutton("warning btn-sm", "Rechazar pedido", "ban")

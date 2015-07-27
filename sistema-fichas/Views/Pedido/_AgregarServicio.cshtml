@@ -3,6 +3,10 @@
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
+<script src="~/Scripts/select2.js"></script>
+<link href="~/Content/select2.css" rel="stylesheet" />
+<link href="~/Content/select2-bootstrap.css" rel="stylesheet" />
+
 <div class="row-fluid">
 @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal" }))
 {
@@ -94,7 +98,7 @@
         var valInput = $('#@Html.IdFor(model => model.PedidoDetalle.Valor)');
         $(valInput).val($(valInput).val().replace('.', ','))
 
-        
+
     }
 
     $(function () {
@@ -114,5 +118,7 @@
 
         $("#@(Html.IdFor(model => model.PedidoDetalle.Valor))").change(function (e) { e.preventDefault(); LimpiarCampos() });
         $("#@Html.IdFor(model => model.PedidoDetalle.Catalogo_ID)").change(function () { sugerirValor(this) });
+
+        $('#@Html.IdFor(model => model.PedidoDetalle.Catalogo_ID)').select2();
     });
 </script>

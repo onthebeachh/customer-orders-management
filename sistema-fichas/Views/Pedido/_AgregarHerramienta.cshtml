@@ -3,6 +3,10 @@
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
+<script src="~/Scripts/select2.js"></script>
+<link href="~/Content/select2.css" rel="stylesheet" />
+<link href="~/Content/select2-bootstrap.css" rel="stylesheet" />
+
 <div class="row">
     @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal" }))
     {
@@ -69,13 +73,12 @@
         </div>
          
     </div>    
-        
-    
-
-
     }
-
 </div>
 
-
+<script type="text/javascript">
+    $(function () {
+        $('#@Html.IdFor(model => model.PedidoDetalle.Herramienta_ID)').select2();
+    });
+</script>
 
