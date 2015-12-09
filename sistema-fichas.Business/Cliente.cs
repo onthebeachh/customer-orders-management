@@ -76,7 +76,7 @@ namespace sistema_fichas.Business
         public virtual TipoCliente TipoCliente { get; set; }
 
         [ForeignKey("User_ID")]
-        [DisplayName("Ejecutivo Asignado")]
+        [DisplayName("Responsable")]
         public virtual UserProfile Usuario { get; set; }
 
 

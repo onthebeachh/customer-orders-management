@@ -37,7 +37,9 @@ namespace sistema_fichas.Repository
 
         public IEnumerable<Pedido> GetAllByCriteria(string attributeName, string attributeValue)
         {
-            return FindBy(x => x.Cliente.NombreFantasia.Contains(attributeValue) || x.UserProfile.UserName.Contains(attributeValue) || x.Cliente.Rut.Contains(attributeValue));
+            int attributeID = 0;
+            Int32.TryParse(attributeValue, out attributeID);
+            return FindBy(x => x.Cliente.NombreFantasia.Contains(attributeValue) || x.UserProfile.UserName.Contains(attributeValue) || x.Cliente.Rut.Contains(attributeValue) || x.EstadoPedido.Nombre.Contains(attributeValue) || x.ID ==  attributeID);
         }
 
         public IEnumerable<Pedido> GetAllOperaciones(string criteria, bool? OnlyActives)

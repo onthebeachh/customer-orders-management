@@ -12,6 +12,7 @@ namespace sistema_fichas.WebApi.Controllers
         public String Cliente_Nombre { get; set; }
         public int Pedido_ID { get; set; }
         public String Pedido_Nombre { get; set; }
+        public String Pedido_Fecha { get; set; }
 
         public IList<ActividadDTO> actividades { get; set; }
 

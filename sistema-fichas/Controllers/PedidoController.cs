@@ -106,6 +106,7 @@ namespace sistema_fichas.Controllers
         {
 
             PedidoViewModel PedidoVM = new PedidoViewModel();
+            
             try {
 
                 if (id == null)
@@ -113,6 +114,7 @@ namespace sistema_fichas.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
                 Pedido pedido = _PedidoService.GetById(id);
+                ViewBag.isOwner = ((WebSecurity.CurrentUserId) == pedido.UserProfile_ID)? true : false;
                 if (pedido == null)
                 {
                     return HttpNotFound();
@@ -327,26 +329,26 @@ namespace sistema_fichas.Controllers
                     case 1:
                         tipoPedidoDetalle = "_ServiciosList";
                         TipoDetalle = TipoPedidoDetalle.Servicio.ToString().ToLower()+"s";
-                        Pedidos = _PedidoDetalleService.GetPedidosDetalleServicio(PedidoDetalle_ID);
+                        Pedidos = _PedidoDetalleService.GetPedidosDetalleServicio(PedidoDetalle_ID).ToList();
                         break;
                     case 2:
                         tipoPedidoDetalle = "_ProductosList";
                         TipoDetalle = TipoPedidoDetalle.Producto.ToString().ToLower() + "s";
-                        Pedidos = _PedidoDetalleService.GetPedidosDetalleProducto(PedidoDetalle_ID);
+                        Pedidos = _PedidoDetalleService.GetPedidosDetalleProducto(PedidoDetalle_ID).ToList();
                         break;
                     case 3:
                         tipoPedidoDetalle = "_HerramientaList";
                         TipoDetalle = TipoPedidoDetalle.Herramienta.ToString().ToLower() + "s";
-                        Pedidos = _PedidoDetalleService.GetPedidosDetalleHerramienta(PedidoDetalle_ID);
+                        Pedidos = _PedidoDetalleService.GetPedidosDetalleHerramienta(PedidoDetalle_ID).ToList();
                         break;
                     case 4:
                         tipoPedidoDetalle = "_ActividadesList";
                         TipoDetalle = TipoPedidoDetalle.Actividad.ToString().ToLower() + "es";
-                        Pedidos = _PedidoDetalleService.GetPedidosDetalleActividad(PedidoDetalle_ID);
+                        Pedidos = _PedidoDetalleService.GetPedidosDetalleActividad(PedidoDetalle_ID).ToList();
                         break;
                     case 5:
                         tipoPedidoDetalle = "_AdjuntoList";
-                        Pedidos = _AdjuntoService.GetAll();/*db.Adjuntos
+                        Pedidos = _AdjuntoService.GetAll().ToList();/*db.Adjuntos
                         .Where(s => s.PedidoID == PedidoDetalle.PedidoID)
                         .ToList();*/
                         break;
@@ -382,7 +384,7 @@ namespace sistema_fichas.Controllers
                     PedidoDetalle.EstadoDetalle_ID = EstadoDetalle_ID;
                     _PedidoDetalleService.Create(PedidoDetalle);
 
-                    var Pedidos = _PedidoDetalleService.GetPedidosDetalleHerramienta(PedidoDetalle.Pedido_ID);
+                    var Pedidos = _PedidoDetalleService.GetPedidosDetalleHerramienta(PedidoDetalle.Pedido_ID).ToList();
                     return Json(new { msg = "Detalle creado <b>exitosamente</b>", status = status_success, contenido = RenderPartialViewToString("_HerramientaList", Pedidos) });
                 }
 
@@ -411,7 +413,7 @@ namespace sistema_fichas.Controllers
                     PedidoDetalle.EstadoDetalle_ID = EstadoDetalle_ID;
 
                     _PedidoDetalleService.Create(PedidoDetalle);
-                    var Pedidos = _PedidoDetalleService.GetPedidosDetalleServicio(PedidoDetalle.Pedido_ID);
+                    var Pedidos = _PedidoDetalleService.GetPedidosDetalleServicio(PedidoDetalle.Pedido_ID).ToList();
 
                     return Json(new { msg = "Detalle creado <b>exitosamente</b>", status = status_success, contenido = RenderPartialViewToString("_ServiciosList", Pedidos) });
                 }
@@ -431,9 +433,6 @@ namespace sistema_fichas.Controllers
 
             try
             {
-                //if(!_PedidoService.IsEditable(PedidoDetalle.Pedido_ID))
-                //    throw new Exception("Detalle: Este pedido ya no puede ser actualizado"); 
-
                 if (ModelState.IsValid)
                 {
                     int EstadoDetalle_ID = _EstadoDetalleService.GetIdEstadoInicial();
@@ -444,7 +443,7 @@ namespace sistema_fichas.Controllers
                     PedidoDetalle.EstadoDetalle_ID = EstadoDetalle_ID;
                     _PedidoDetalleService.Create(PedidoDetalle);
 
-                    var Pedidos = _PedidoDetalleService.GetPedidosDetalleActividad(PedidoDetalle.Pedido_ID);
+                    var Pedidos = _PedidoDetalleService.GetPedidosDetalleActividad(PedidoDetalle.Pedido_ID).ToList();
                     return Json(new { msg = "Detalle creado <b>exitosamente</b>", status = status_success, contenido = RenderPartialViewToString("_ActividadesList", Pedidos) });
                 }
                 else
@@ -477,7 +476,7 @@ namespace sistema_fichas.Controllers
                     PedidoDetalle.EstadoDetalle_ID = EstadoDetalle_ID;
                     _PedidoDetalleService.Create(PedidoDetalle);
 
-                    var Pedidos = _PedidoDetalleService.GetPedidosDetalleProducto(PedidoDetalle.Pedido_ID);
+                    var Pedidos = _PedidoDetalleService.GetPedidosDetalleProducto(PedidoDetalle.Pedido_ID).ToList();
                     return Json(new { msg = "Detalle creado <b>exitosamente</b>", status = status_success, contenido = RenderPartialViewToString("_ProductosList", Pedidos) });
                 }
                 else
@@ -504,7 +503,7 @@ namespace sistema_fichas.Controllers
                     {
                         msg = "Adjunto creado <b>exitósamente</b>";
                         _AdjuntoService.Create(Adjunto);
-                        var Adjuntos = _AdjuntoService.GetAll();
+                        var Adjuntos = _AdjuntoService.GetAll().ToList();
                         return Json(new { msg = "Detalle creado <b>exitosamente</b>", status = status_success, contenido = RenderPartialViewToString("_AdjuntoList", Adjuntos) });
                     }
                     else{
@@ -565,6 +564,7 @@ namespace sistema_fichas.Controllers
             String msg_error = "Ocurrio un problema al intentar activar el pedido, por favor intente de nuevo.";
             String msg_success = "El Pedido ha sido actualizado exitosamente";
             int EstadoID = 1;
+            
 
             try
             {
@@ -572,6 +572,7 @@ namespace sistema_fichas.Controllers
                     throw new Exception("Detalle: Debe especificar una ID de pedido."); 
 
                 Pedido Pedido = _PedidoService.GetById(PedidoID);
+                ViewBag.iSOwner = ((WebSecurity.CurrentUserId) == Pedido.UserProfile_ID) ? true : false;
 
                 if (Pedido == null)
                     throw new Exception("Detalle: El pedido no se encuentra en la BD."); 

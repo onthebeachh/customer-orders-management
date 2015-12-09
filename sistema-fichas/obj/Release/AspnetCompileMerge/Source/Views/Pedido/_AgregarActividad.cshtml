@@ -3,6 +3,9 @@
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
+<script src="~/Scripts/select2.js"></script>
+<link href="~/Content/select2.css" rel="stylesheet" />
+
 <div class="row-fluid">
     @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal" }))
     {
@@ -39,14 +42,6 @@
         </div>
 
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.PedidoDetalle.TipoCobro, new { @class = "control-label col-md-2" })
-        <div class="col-md-8">
-            @Html.DropDownListFor(model => model.PedidoDetalle.TipoCobro, Model.ListaTipoCobro, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.PedidoDetalle.TipoCobro, null, new { @class = "text-danger" })
-        </div>
-    </div>
                 
     <div class="form-group">
         @Html.LabelFor(model => model.PedidoDetalle.FechaInicio,"Fecha", new { @class = "control-label col-md-2" })
@@ -69,8 +64,10 @@
     }
 
 </div>
-<script>
+<script type="text/javascript">
     $(function () {
         $('#@Html.IdFor(model => model.PedidoDetalle.FechaInicio)').datetimepicker({ format: 'DD/MM/YYYY hh:mm:ss' });
+        $('#@Html.IdFor(model => model.PedidoDetalle.Catalogo_ID)').select2();
     });
 </script>
+

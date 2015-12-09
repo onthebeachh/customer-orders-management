@@ -30,7 +30,11 @@ namespace sistema_fichas.Repository
 
         public IEnumerable<Cliente> GetAllWithPedidos(int EstadoPedido)
         {
-            return FindBy(x => x.Pedidos.FirstOrDefault().EstadoPedido.Estado == EstadoPedido && x.Pedidos.Count > 0);
+            int aprobado_operaciones = TipoEstadoPedido.Aprobado_Operaciones.GetHashCode();
+            int estado_inactivo = TipoEstadoDetalle.Inactivo.GetHashCode();
+            int estado_finalizado = TipoEstadoDetalle.Finalizado.GetHashCode();
+            int tipo_actividad = TipoPedidoDetalle.Actividad.GetHashCode();
+            return FindBy(x => x.Pedidos.Where(y => y.EstadoPedido.Estado == aprobado_operaciones && y.PedidosDetalle.Where(z => z.EstadoDetalle.Estado != estado_inactivo && z.EstadoDetalle.Estado != estado_finalizado && z.Tipo == tipo_actividad).Count() > 0).Count() > 0);
         }
 
         public IEnumerable<Cliente> GetAllByCriteria(string attributeName, string attributeValue)

@@ -13,12 +13,14 @@ namespace sistema_fichas.WebApi.Controllers
     public class ActividadController : ApiController
     {
         IPedidoDetalleService _PedidoDetalleService;
+        IPedidoService _PedidoService;
         IEstadoDetalleService _EstadoDetalleService;
 
-        public ActividadController(IPedidoDetalleService PedidoDetalleService, IEstadoDetalleService EstadoDetalleService) 
+        public ActividadController(IPedidoDetalleService PedidoDetalleService, IEstadoDetalleService EstadoDetalleService, IPedidoService PedidoService) 
         {
             _PedidoDetalleService = PedidoDetalleService;
             _EstadoDetalleService = EstadoDetalleService;
+            _PedidoService = PedidoService;
         }
 
         public IEnumerable<ActividadDTO> Get()
@@ -58,6 +60,7 @@ namespace sistema_fichas.WebApi.Controllers
             try 
             {
                 PedidoDetalle actividad = _PedidoDetalleService.GetById(estado.id);
+                bool actualizarPedido = false;
                 if (actividad == null)
                 {
                     throw new HttpResponseException(HttpStatusCode.BadRequest);
@@ -82,7 +85,8 @@ namespace sistema_fichas.WebApi.Controllers
                         actividad.Finalizado++;
                         if (actividad.Finalizado == actividad.Cantidad)
                         {
-                            actividad.EstadoDetalle_ID = _EstadoDetalleService.GetIdEstado(estado_finalizado); ;
+                            actividad.EstadoDetalle_ID = _EstadoDetalleService.GetIdEstado(estado_finalizado);
+                            actualizarPedido = true;
                         }
                         else
                         {
@@ -95,6 +99,18 @@ namespace sistema_fichas.WebApi.Controllers
                     }
                 }
                 _PedidoDetalleService.Update(actividad);
+
+                if (actualizarPedido)
+                {
+                    int tieneActPendientes = actividad.Pedido.PedidosDetalle.Where(x => x.Tipo == TipoPedidoDetalle.Actividad.GetHashCode() && x.EstadoDetalle.Estado != TipoEstadoDetalle.Finalizado.GetHashCode() && x.EstadoDetalle.Estado != TipoEstadoDetalle.Finalizado.GetHashCode()).Count();
+                    if (tieneActPendientes == 0)
+                    {
+                        actividad.Pedido.EstadoPedido_ID = 9;
+                        _PedidoService.Update(actividad.Pedido);
+                    }
+                }
+
+
                 return this.Request.CreateResponse(HttpStatusCode.OK);
             }
             catch (Exception e)

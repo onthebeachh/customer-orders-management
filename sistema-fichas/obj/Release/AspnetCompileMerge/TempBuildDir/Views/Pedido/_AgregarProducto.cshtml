@@ -3,6 +3,10 @@
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
+<script src="~/Scripts/select2.js"></script>
+<link href="~/Content/select2.css" rel="stylesheet" />
+<link href="~/Content/select2-bootstrap.css" rel="stylesheet" />
+
 <div class="row-fluid">
     @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal" }))
     {
@@ -116,5 +120,7 @@
 
         modalidadID = $('#@Html.IdFor(model => model.PedidoDetalle.Modalidad_ID)').val();
         ciclo_fechas(modalidadID);
+
+        $('#@Html.IdFor(model => model.PedidoDetalle.Catalogo_ID)').select2();
     });
 </script>

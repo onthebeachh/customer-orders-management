@@ -198,6 +198,7 @@ namespace sistema_fichas.Controllers
                     throw new Exception("Detalle: Debe especificar una ID de pedido.");
 
                 Pedido Pedido = _PedidoService.GetById(PedidoID);
+                ViewBag.iSOwner = ((WebSecurity.CurrentUserId) == Pedido.UserProfile_ID) ? true : false;
 
                 if (Pedido == null)
                     throw new Exception("Detalle: El pedido no se encuentra en la BD.");
@@ -219,31 +220,5 @@ namespace sistema_fichas.Controllers
         }
 
 
-
-        //
-        // GET: /Operaciones/Delete/5
-
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Operaciones/Delete/5
-
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

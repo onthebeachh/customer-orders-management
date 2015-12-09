@@ -86,9 +86,9 @@
             </td>
             <td class="text-left">
                 
-                <label class="label label-success">@item.PedidosDetalle.Where(x => x.Tipo == 1 && x.EstadoDetalle.Estado == 1).Count()</label> Servicios<br />
-                <label class="label label-info">@item.PedidosDetalle.Where(x => x.Tipo == 2 && x.EstadoDetalle.Estado == 1).Count()</label> Productos <br />
-                <label class="label label-primary">@item.PedidosDetalle.Where(x => x.Tipo == 4 && x.EstadoDetalle.Estado == 1).Count()</label> Actividades
+                <label class="label label-success">@item.PedidosDetalle.Where(x => x.Tipo == 1 && x.EstadoDetalle.Estado != sistema_fichas.Business.TipoEstadoDetalle.Inactivo.GetHashCode()).Count()</label> Servicios<br />
+                <label class="label label-info">@item.PedidosDetalle.Where(x => x.Tipo == 2 && x.EstadoDetalle.Estado != sistema_fichas.Business.TipoEstadoDetalle.Inactivo.GetHashCode()).Count()</label> Productos <br />
+                <label class="label label-primary">@item.PedidosDetalle.Where(x => x.Tipo == 4 && x.EstadoDetalle.Estado == sistema_fichas.Business.TipoEstadoDetalle.Finalizado.GetHashCode()).Count() / @item.PedidosDetalle.Where(x => x.Tipo == 4 && x.EstadoDetalle.Estado != sistema_fichas.Business.TipoEstadoDetalle.Inactivo.GetHashCode()).Count()</label> Actividades
             </td>
             <td class="text-center">
                 <a href="@Url.Action("Details", "Pedido", new { id = item.ID })">

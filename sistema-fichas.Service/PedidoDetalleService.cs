@@ -32,10 +32,12 @@ namespace sistema_fichas.Service
 
         public IEnumerable<PedidoDetalle> GetAllByClienteId(long Cliente_ID, bool? OnlyActives = true) 
         {
-            if(OnlyActives.Value.Equals(true)){
+            if(OnlyActives.Value.Equals(true))
+            {
                 return _pedidoDetalleRepository.FindBy(x => x.Pedido.Cliente_ID.Equals(Cliente_ID) && x.EstadoDetalle.Estado.Equals(1));
             }
-            else{
+            else
+            {
                 return _pedidoDetalleRepository.FindBy(x => x.Pedido.Cliente_ID.Equals(Cliente_ID));
             }
         }
@@ -63,6 +65,11 @@ namespace sistema_fichas.Service
         public IEnumerable<PedidoDetalle> GetAllByPedidoId(int Pedido_ID, int? TipoPedidoDetalle_ID,bool? OnlyActives=true)
         {
                 return _pedidoDetalleRepository.GetAllByPedidoId(Pedido_ID, TipoPedidoDetalle_ID, OnlyActives.Value);           
+        }
+
+        public IEnumerable<PedidoDetalle> GetAllActividadesNoFinalizadas(int Pedido_ID)
+        {
+            return _pedidoDetalleRepository.GetActividadesNoFinalizadas(Pedido_ID);
         }
     }
 }

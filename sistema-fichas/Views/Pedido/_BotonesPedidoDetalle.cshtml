@@ -9,10 +9,13 @@
             <a href="#" id="editar_pedido" data-toggle="modal" data-target="#modal_contenido" data-id="@Model.ID">
                 @Html.BSbutton("info btn-sm", "Editar info", "check")
             </a>
+            if (ViewBag.iSOwner)
+            {
+                <a href="#" class="cambiar_estado" data-id="@Model.ID" data-text="enviar a revisión" data-action="@sistema_fichas.Business.TipoEstadoPedido.Revision.GetHashCode()">
+                    @Html.BSbutton("primary btn-sm", "Enviar a revisión", "paper-plane")
+                </a>
+            }
 
-            <a href="#" class="cambiar_estado" data-id="@Model.ID" data-text="enviar a revisión" data-action="@sistema_fichas.Business.TipoEstadoPedido.Revision.GetHashCode()">
-                @Html.BSbutton("primary btn-sm", "Enviar a revisión", "paper-plane")
-            </a>
 
         }
         else if (PedidoHelper.esEvaluable(Model.EstadoPedido.Estado) && AuthorizationHelper.isAdministradorComercial(User))
@@ -20,10 +23,9 @@
             <a href="#" class="cambiar_estado" data-id="@Model.ID" data-text="rechazar" data-action="@sistema_fichas.Business.TipoEstadoPedido.Rechazado_Comercial.GetHashCode()">
                 @Html.BSbutton("warning btn-sm", "Rechazar pedido", "ban")
             </a>
-    <a href="#" class="cambiar_estado" data-id="@Model.ID" data-text="aceptar" data-action="@sistema_fichas.Business.TipoEstadoPedido.Aprobado_Comercial.GetHashCode()">
-        @Html.BSbutton("success btn-sm ", "Aceptar pedido", "check")
-    </a>
-
+            <a href="#" class="cambiar_estado" data-id="@Model.ID" data-text="aceptar" data-action="@sistema_fichas.Business.TipoEstadoPedido.Aprobado_Comercial.GetHashCode()">
+                @Html.BSbutton("success btn-sm ", "Aceptar pedido", "check")
+            </a>
         }
 
 

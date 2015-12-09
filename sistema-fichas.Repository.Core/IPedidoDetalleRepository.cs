@@ -11,5 +11,6 @@ namespace sistema_fichas.Repository.Core
     {
         PedidoDetalle GetById(int Id);
         IEnumerable<PedidoDetalle> GetAllByPedidoId(int Pedido_ID, int? TipoPedidoDetalle_ID, bool? OnlyActives = true);
+        IEnumerable<PedidoDetalle> GetActividadesNoFinalizadas(int Pedido_ID);
     }
 }

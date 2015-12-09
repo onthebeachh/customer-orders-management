@@ -37,6 +37,7 @@ namespace sistema_fichas.WebApi.Controllers
             agendaDTO.Pedido_Nombre = pedidoDetalle.Pedido_ID.ToString();
             agendaDTO.Cliente_ID = unchecked((int)pedidoDetalle.Pedido.Cliente_ID);
             agendaDTO.Cliente_Nombre = pedidoDetalle.Pedido.Cliente.NombreFantasia;
+            agendaDTO.Pedido_Fecha = (pedidoDetalle.Pedido.FechaInicio != null) ? pedidoDetalle.Pedido.FechaInicio.Value.ToString("dd/MM/yyyy") : DateTime.MinValue.ToString("dd/MM/yyyy");
 
             var actividadesNoEliminadas = _PedidoDetalleService.GetPedidosDetalleActividad(pedidoDetalle.Pedido_ID);
 
@@ -47,6 +48,11 @@ namespace sistema_fichas.WebApi.Controllers
                 ActividadDTO a = new ActividadDTO();
                 a.ID = p.ID;
                 a.Nombre = p.Catalogo.Nombre;
+                a.Cantidad = (p.Cantidad != null) ? (p.Cantidad.Value - p.Finalizado.Value) : 0;
+                a.Fecha = (p.FechaInicio != null) ? p.FechaInicio.Value.ToString("dd/MM/yyyy HH:mm:ss") : DateTime.MinValue.ToString("dd/MM/yyyy HH:mm:ss");
+                a.Fecha = a.Fecha.Replace('-', '/');
+                a.Descripcion = p.Comentario;
+                a.Estado = p.EstadoDetalle.Nombre;
                 actividades.Add(a);
             
             }

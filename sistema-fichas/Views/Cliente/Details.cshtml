@@ -14,7 +14,8 @@
 
 <div class="row-fluid">
     
-        <h1 class="text-center">@Html.DisplayFor(model => model.cliente.NombreFantasia) - C&oacute;digo # @Html.DisplayFor(model => model.cliente.ID) </h1>
+        <h1 class="text-center" style="margin-bottom: 0px">@Html.DisplayFor(model => model.cliente.NombreFantasia)</h1>
+        <h3 class="text-center" style="margin-top: 0px">C&oacute;d. # @Html.DisplayFor(model => model.cliente.ID)</h3>
     <div id="cliente_detalle">
         <div class="col-xs-12 col-md-6">
             <dl class="dl-horizontal">
@@ -66,7 +67,7 @@
                         {
                             foreach (var item in Model.cliente.Direcciones.Where(s => s.Tipo == 1 && s.Estado!= 0)){
                                 <tr  id="tr_dir_@item.ID">
-                                <td style="padding:0px;border:0;width:10px" id="td_dir_@item.ID">@(item.Calle + " #" + item.Numero + " - depto " + item.Departamento + ", " +item.Ciudad)</td><td style="padding:0px;border:0;width:10px;"><i class="fa fa-times text-danger i_delete_direcciones" style="cursor:pointer;" onmouseover="document.getElementById('td_dir_@item.ID').style.textDecoration='underline';this.style.textDecoration='underline';" onmouseout="document.getElementById('td_dir_@item.ID').style.textDecoration='none';this.style.textDecoration='none';" data-id="@item.ID"></i></td></tr>    
+                                <td style="padding:0px;border:0;width:10px" id="td_dir_@item.ID">@DireccionHelper.DireccionCliente(item.Calle, item.Numero, item.Departamento, item.Ciudad)</td><td style="padding:0px;border:0;width:10px;"><i class="fa fa-times text-danger i_delete_direcciones" style="cursor:pointer;" onmouseover="document.getElementById('td_dir_@item.ID').style.textDecoration='underline';this.style.textDecoration='underline';" onmouseout="document.getElementById('td_dir_@item.ID').style.textDecoration='none';this.style.textDecoration='none';" data-id="@item.ID"></i></td></tr>    
                             }
                         }  
                     </table>
@@ -229,10 +230,11 @@
                                     <table class="table table-bordered table-condensed table-striped table-hover table-responsive">
                                         <thead>
                                             <tr>
-                                                <th class="col-md-4">Nombres</th>
-                                                <th class="col-md-3">Email</th>
+                                                <th class="col-md-3">Nombres</th>
+                                                <th class="col-md-2">Email</th>
                                                 <th class="">Cargo</th>
                                                 <th class="">Celular</th>
+                                                <th class="">Teléfono</th>
                                                 <th class="">Tipo</th>
                                                 <th class="col-md-1"></th>
                                             </tr>
@@ -254,6 +256,8 @@
                                                         <td>@item.Email</td>
                                                         <td>@item.Cargo</td>
                                                         <td>@item.Celular</td>
+                                                        <td>@item.Telefono</td>
+                                                        
                                                         <td><label class="label label-success">@ContactoHelper.getTipoName(item.Tipo.Value)</label></td>
                                                         <td>
                                                             <button type="button" class="btn btn-primary btn-sm editar_contacto" alt="Editar" data-id="@item.ID" data-toggle="modal" data-target="#modal_contenido">

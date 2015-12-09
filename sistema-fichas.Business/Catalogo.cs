@@ -13,6 +13,8 @@ namespace sistema_fichas.Business
         [Required(ErrorMessage = "Debe Ingresar un Nombre")]
         [DisplayName("Nombre")]
         [DisplayFormat(NullDisplayText = "N/A")]
+        [MaxLength(255)]
+        [StringLength(255)]
         public string Nombre { get; set; }
 
         [Required(ErrorMessage = "Debe Ingresar un Valor base UF")]

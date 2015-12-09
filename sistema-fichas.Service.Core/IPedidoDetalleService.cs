@@ -18,5 +18,6 @@ namespace sistema_fichas.Service.Core
 
         IEnumerable<PedidoDetalle> GetAllByClienteId(long Cliente_ID, bool? OnlyActives = true);
         IEnumerable<PedidoDetalle> GetAllByPedidoId(int Pedido_ID, int? TipoPedidoDetalle_ID, bool? OnlyActives = true);
+        IEnumerable<PedidoDetalle> GetAllActividadesNoFinalizadas(int Pedido_ID);
     }
 }

@@ -10,7 +10,6 @@
                 @Html.ValidationSummary(true)
                 
                 @Html.HiddenFor(model => model.Pedido.Cliente_ID)
-                @Html.HiddenFor(model => model.Pedido.UserProfile_ID)
                 @Html.HiddenFor(model => model.Pedido.EstadoPedido_ID)
 
 
@@ -28,7 +27,13 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Pedido.UserProfile_ID, new { @class = "control-label col-md-2" })
                     <div class="col-md-8">
-                        @Html.DropDownListFor(model => model.Pedido.UserProfile_ID, Model.ListaUsuarios, new { @class = "form-control" })
+                        @if (AuthorizationHelper.isAdministradorComercial(User)) { 
+                            @Html.DropDownListFor(model => model.Pedido.UserProfile_ID, Model.ListaUsuarios, new { @class = "form-control" });
+                        }else if(AuthorizationHelper.isEjecutivoCuenta(User)){
+                            @Html.HiddenFor(model => model.Pedido.UserProfile_ID, new { @class = "form-control" });
+                            @Html.Label(User.Identity.Name.ToUpper(), new { @class = "form-control", @disabled = true })
+                        }
+                        
                         <em>@Html.ValidationMessageFor(model => model.Pedido.UserProfile_ID, null, new { @class = "text-danger" })</em>
                     </div>
                 </div>

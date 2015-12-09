@@ -133,7 +133,7 @@ namespace sistema_fichas.Controllers
                     if (ModelState.IsValid)
                     {
                         status = true;
-                        msg = "Contacto creado <b>exitósamente</b>";
+                        msg = "Contacto editado <b>exitósamente</b>";
                         _ContactoService.Update(contacto);
                     }
                     else

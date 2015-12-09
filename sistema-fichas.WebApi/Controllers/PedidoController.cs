@@ -34,7 +34,7 @@ namespace sistema_fichas.WebApi.Controllers
             {
                 PedidoConDetalles pedidoConDetalle = new PedidoConDetalles();
                 pedidoConDetalle.Pedido_ID = p.ID;
-                pedidoConDetalle.Pedido_FechaInicio = p.FechaInicio.Value;
+                pedidoConDetalle.Pedido_FechaInicio = (p.FechaInicio != null) ? p.FechaInicio.Value : DateTime.MinValue;
 
                 pedidoConDetalle.Estado_ID = p.EstadoPedido_ID.Value;
                 pedidoConDetalle.Estado_Codigo = p.EstadoPedido.Estado;
@@ -53,9 +53,9 @@ namespace sistema_fichas.WebApi.Controllers
                     {
 
                         Actividad_ID = Convert.ToInt32(x.ID),
-                        Actividad_Cantidad = x.Cantidad.Value,
+                        Actividad_Cantidad = (x.Cantidad != null) ? (x.Cantidad.Value-x.Finalizado.Value) : 0,
                         Actividad_Nombre = x.Catalogo.Nombre,
-                        Actividad_Fecha = x.FechaInicio.Value,
+                        Actividad_Fecha = (x.FechaInicio != null) ? x.FechaInicio.Value : DateTime.MinValue,
                         Estado_Nombre = x.EstadoDetalle.Nombre,
                         Moneda_Alias = x.Moneda.Alias
 
@@ -76,13 +76,14 @@ namespace sistema_fichas.WebApi.Controllers
         // GET api/pedido/5
         public IList<ActividadDTO> Get(int id)
         {
-            var actividades = _PedidoDetalleService.GetPedidosDetalleActividad(id).ToList().Where(x => x.Pedido.EstadoPedido.Estado == TipoEstadoPedido.Aprobado_Operaciones.GetHashCode());
+            var actividades = _PedidoDetalleService.GetAllActividadesNoFinalizadas(id).ToList();
             IList<ActividadDTO> actividadesDTO = new List<ActividadDTO>();
             foreach (PedidoDetalle a in actividades)
             {
                 ActividadDTO actividad = new ActividadDTO();
                 actividad.ID = a.ID;
                 actividad.Nombre = a.Catalogo.Nombre;
+                actividad.Cantidad = (a.Cantidad != null) ? (a.Cantidad.Value-a.Finalizado.Value) : 0;
                 actividadesDTO.Add(actividad);
             }
             return actividadesDTO;

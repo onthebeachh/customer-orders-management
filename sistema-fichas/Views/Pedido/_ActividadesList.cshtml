@@ -13,6 +13,7 @@
                 <th class="col-xs-1 text-center">Valor</th>
                 <th class="col-xs-4 text-center">Actividad</th>
                 <th class="col-xs-2 text-center">Fecha</th>
+                <th class="col-xs-2 text-center">Fecha Actualización</th>
                 <th class="col-xs-1 text-center">Estado</th>
                 <th class="col-xs-1 text-center"></th>
             </tr>
@@ -36,11 +37,11 @@
                         <td class=" text-center">@(count++) </td>
                         <td class="text-center"> @Html.DisplayFor(modelItem => item.Cantidad)</td>
                         <td class="text-center"> @Html.DisplayFor(modelItem => item.Finalizado)</td>
-                        <td class="text-right"> @Html.DisplayFor(modelItem => item.Valor) <label class="label label-default">@Html.DisplayFor(modelItem => item.Moneda.Alias)</td>
-                        <td class="text-center"> @Html.DisplayFor(modelItem => item.Catalogo.Nombre) </td>
+                        <td class="text-right">  @Html.DisplayFor(modelItem => item.Valor) <label class="label label-default">@Html.DisplayFor(modelItem => item.Moneda.Alias)</label></td>
+                        <td class="text-center"> @Html.DisplayFor(modelItem => item.Catalogo.Nombre)</td>
                         <td class="text-center"> @Html.DisplayFor(modelItem => item.FechaInicio)</td>
-
-                        <td class="text-center"> <label class="label label-success">@Html.DisplayFor(modelItem => item.EstadoDetalle.Nombre) </label></td>
+                        <td class="text-center"> @Html.DisplayFor(modelItem => item.UpdatedDate)</td>
+                        <td class="text-center"> <label class="@PedidoDetalleHelper.getColorActividad(item.EstadoDetalle.Estado)">@Html.DisplayFor(modelItem => item.EstadoDetalle.Nombre) </label></td>
                         <td class="text-center">
                             @Html.botonVer(sistema_fichas.Business.TipoPedidoDetalle.Actividad.GetHashCode(), item.ID.ToString()) 
                             @Html.botonEditar(sistema_fichas.Business.TipoPedidoDetalle.Actividad.GetHashCode(), item.ID.ToString()).If(PedidoHelper.esActivoEditable(item.EstadoDetalle.Estado, item.Pedido.EstadoPedido.Estado))
