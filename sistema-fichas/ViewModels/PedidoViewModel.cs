@@ -29,6 +29,7 @@ namespace sistema_fichas.ViewModels
         public IEnumerable<Herramienta> Herramientas { get; set; }
         public IEnumerable<Moneda> Monedas { get; set; }
         public IEnumerable<UserProfile> Users { get; set; }
+        public IEnumerable<Patente> Patentes { get; set; }
 
         public IEnumerable<PedidoDetalle> HerramientasActivas
         {
@@ -69,7 +70,22 @@ namespace sistema_fichas.ViewModels
                 return Pedido.Adjuntos.Where(s => s.Estado == 1);
             }
         }
+
+        public IEnumerable<Patente> PatentesActivas
+        {
+            get
+            {
+                return Pedido.Patentes.Where(s => s.Estado == TipoEstadoPatente.Activa.GetHashCode()).ToList();
+            }
+        }
         
+        public SelectList ListaPatentes
+        {
+            get
+            {
+                return new SelectList(this.Patentes.ToList(), "ID", "Numero", null);
+            }
+        }
 
         public SelectList ListaHerramientas { get { return new SelectList(this.Herramientas.ToList(), "ID", "Nombre", null); } }
         public SelectList ListaModalidades { get { return new SelectList(this.Modalidades.ToList(), "ID", "Nombre", null); } }

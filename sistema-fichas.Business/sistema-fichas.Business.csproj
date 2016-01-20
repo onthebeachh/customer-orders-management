@@ -114,10 +114,23 @@
     <Compile Include="Migrations\201507242114289_UpdatePedidoDetalleAddFinalizado.Designer.cs">
       <DependentUpon>201507242114289_UpdatePedidoDetalleAddFinalizado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601061600234_AddPatenteModelAndRelations.cs" />
+    <Compile Include="Migrations\201601061600234_AddPatenteModelAndRelations.Designer.cs">
+      <DependentUpon>201601061600234_AddPatenteModelAndRelations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601081835450_UpdatePatenteModel.cs" />
+    <Compile Include="Migrations\201601081835450_UpdatePatenteModel.Designer.cs">
+      <DependentUpon>201601081835450_UpdatePatenteModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601111503336_UpdatePatenteModel1.cs" />
+    <Compile Include="Migrations\201601111503336_UpdatePatenteModel1.Designer.cs">
+      <DependentUpon>201601111503336_UpdatePatenteModel1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modalidad.cs" />
     <Compile Include="Moneda.cs" />
     <Compile Include="OrdenTrabajo.cs" />
+    <Compile Include="Patente.cs" />
     <Compile Include="Pedido.cs" />
     <Compile Include="PedidoDetalle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -172,6 +185,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201507242114289_UpdatePedidoDetalleAddFinalizado.resx">
       <DependentUpon>201507242114289_UpdatePedidoDetalleAddFinalizado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601061600234_AddPatenteModelAndRelations.resx">
+      <DependentUpon>201601061600234_AddPatenteModelAndRelations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601081835450_UpdatePatenteModel.resx">
+      <DependentUpon>201601081835450_UpdatePatenteModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601111503336_UpdatePatenteModel1.resx">
+      <DependentUpon>201601111503336_UpdatePatenteModel1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -11,7 +11,7 @@
                 <th class="col-xs-1 text-center">Cant. Solicitada</th>
                 <th class="col-xs-1 text-center">Cant. Realizada</th>
                 <th class="col-xs-1 text-center">Valor</th>
-                <th class="col-xs-4 text-center">Actividad</th>
+                <th class="col-xs-2 text-center">Actividad</th>
                 <th class="col-xs-2 text-center">Fecha</th>
                 <th class="col-xs-2 text-center">Fecha Actualización</th>
                 <th class="col-xs-1 text-center">Estado</th>
@@ -32,7 +32,7 @@
                 int count = 1;
                 foreach (var item in Model)
                 {
-                    <tr id="productos-@Html.DisplayFor(modelItem => item.ID)">
+                    <tr id="actividads-@Html.DisplayFor(modelItem => item.ID)">
                         <td class=" text-center"> @item.Pedido_ID </td>
                         <td class=" text-center">@(count++) </td>
                         <td class="text-center"> @Html.DisplayFor(modelItem => item.Cantidad)</td>

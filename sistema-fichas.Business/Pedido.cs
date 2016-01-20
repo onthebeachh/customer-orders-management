@@ -16,6 +16,7 @@ namespace sistema_fichas.Business
             this.FechaTermino = DateTime.Now;
             this.Facturado = false;
             this.PedidosDetalle = new HashSet<PedidoDetalle>();
+            this.Patentes = new HashSet<Patente>();
         }
 
         [DisplayName("Fecha Inicio")]
@@ -52,8 +53,11 @@ namespace sistema_fichas.Business
 
         public virtual ICollection<PedidoDetalle> PedidosDetalle { get; set; }
         public virtual ICollection<Adjunto> Adjuntos { get; set; }
-        
-        
+
+        [DisplayName("Patentes")]
+        public virtual ICollection<Patente> Patentes { get; set; }
+
+
 
     }
 }

@@ -15,11 +15,13 @@ namespace sistema_fichas.WebApi.Controllers
         IPedidoDetalleService _PedidoDetalleService;
         IPedidoService _PedidoService;
         IEstadoDetalleService _EstadoDetalleService;
+        IPatenteService _PatenteService;
 
-        public ActividadController(IPedidoDetalleService PedidoDetalleService, IEstadoDetalleService EstadoDetalleService, IPedidoService PedidoService) 
+        public ActividadController(IPedidoDetalleService PedidoDetalleService, IEstadoDetalleService EstadoDetalleService, IPedidoService PedidoService, IPatenteService PatenteService) 
         {
             _PedidoDetalleService = PedidoDetalleService;
             _EstadoDetalleService = EstadoDetalleService;
+            _PatenteService = PatenteService;
             _PedidoService = PedidoService;
         }
 
@@ -90,7 +92,7 @@ namespace sistema_fichas.WebApi.Controllers
                         }
                         else
                         {
-                            actividad.EstadoDetalle_ID = _EstadoDetalleService.GetIdEstado(estado_parcial); ;
+                            actividad.EstadoDetalle_ID = _EstadoDetalleService.GetIdEstado(estado_parcial);
                         }
                     }
                     else
@@ -99,6 +101,7 @@ namespace sistema_fichas.WebApi.Controllers
                     }
                 }
                 _PedidoDetalleService.Update(actividad);
+                _PatenteService.ValidarPatente(estado.patente,estado.gps_id);
 
                 if (actualizarPedido)
                 {

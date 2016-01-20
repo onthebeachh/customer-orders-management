@@ -17,13 +17,34 @@
         @(Html.Partial("~/Views/Pedido/_ServiciosList.cshtml", Model.ServiciosActivos))
         
     </div>
+    @if(PedidoHelper.esEditable(Model.Pedido.EstadoPedido.Estado))
+    {
+    <div class="col-xs-12 col-md-12 col-lg-12 btn-agregar">
+        <div class="pull-right">
+            <div class="form-group">
+                <button class="btn btn-primary btn-sm  form-control" id="agregar_detalle" data-toggle="modal" data-target="#modal_contenido" data-url="@(Url.Action("AgregarServicio", "Pedido"))" data-id="@Model.Pedido.ID" data-type="servicio">
+                    <span class="fa fa-gears"></span> Agregar Servicio
+                </button>
+            </div>
+        </div>       
+    </div>
+    }
+</div>
+
+<div id="div_patente" class="col-xs-12 col-md-12 col-lg-12">
+    <h3>Patentes</h3>
+    <div id="div_patentes">
+        @(Html.Partial("~/Views/Pedido/_PatentesList.cshtml", Model.PatentesActivas))
+    </div>
     @if (PedidoHelper.esEditable(Model.Pedido.EstadoPedido.Estado))
     {
-    <div class="col-xs-12 col-md-12">
-            <button class="btn btn-primary btn-sm pull-right" id="agregar_detalle" data-toggle="modal" data-target="#modal_contenido" data-url="@(Url.Action("AgregarServicio", "Pedido"))" data-id="@Model.Pedido.ID" data-type="servicio">
-                <span class="fa fa-gears"></span> Agregar Servicio
-            </button>
-    </div>
+        <div class="col-xs-12 col-md-12 col-lg-12 btn-agregar">
+            <div class="form-group pull-right">
+                <button class="btn btn-primary btn-sm form-control" id="agregar_patente" data-toggle="modal" data-target="#modal_contenido" data-url="" data-id="@Model.Pedido.ID" data-type="patente">
+                    <span class="fa fa-automobile"></span> Agregar Patente
+                </button>
+            </div>
+        </div>
     }
 </div>
 
@@ -34,7 +55,7 @@
     </div>
     @if (PedidoHelper.esEditable(Model.Pedido.EstadoPedido.Estado))
     {
-    <div class="col-xs-12 col-md-12">
+    <div class="col-xs-12 col-md-12 col-lg-12 btn-agregar">
             <button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#modal_contenido" id="agregar_producto" data-id="@Model.Pedido.ID" data-type="producto">
                 <i class="fa fa-shopping-cart"></i> Agregar Producto
             </button>
@@ -51,7 +72,7 @@
     
     @if (PedidoHelper.esEditable(Model.Pedido.EstadoPedido.Estado))
     {
-        <div class="col-xs-12 col-md-12">
+        <div class="col-xs-12 col-md-12 col-lg-12 btn-agregar">
             <button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#modal_contenido" id="agregar_actividad" data-id="@Model.Pedido.ID" data-type="actividad">
                 <i class="fa fa-tags"></i> Agregar Actividad
             </button>
@@ -68,7 +89,7 @@
     </div>
     @if (PedidoHelper.esEditable(Model.Pedido.EstadoPedido.Estado))
     {
-        <div class="col-xs-12 col-md-12">
+        <div class="col-xs-12 col-md-12 col-lg-12 btn-agregar">
                 <button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#modal_contenido" id="agregar_herramienta" data-id="@Model.Pedido.ID" data-type="herramienta">
                     <i class="fa fa-wrench"></i> Agregar herramienta
                 </button>
@@ -83,7 +104,7 @@
     </div>
     @if (PedidoHelper.esEditable(Model.Pedido.EstadoPedido.Estado))
     {
-    <div class="col-xs-12 col-md-12">
+    <div class="col-xs-12 col-md-12 col-lg-12 btn-agregar">
             <button data-toggle="modal" data-target="#modal_contenido" id="agregar_adjunto" class="btn btn-primary btn-sm pull-right" data-id="@Model.Pedido.ID" data-type="adjunto" type="button">
                 <i class="fa fa-file-o"></i> Agregar Adjunto
             </button>
@@ -233,6 +254,12 @@
                     if (data.status == true) {
                         $('#div_pedidos').html(data.contenido);
                         $('#div_btn_estado_editar_pedido').html(data.contenidoBotones);
+                        console.log(data.estado);
+
+                        if(data.estado == @(sistema_fichas.Business.TipoEstadoPedido.Revision.GetHashCode())){
+                            $('.btn-agregar').remove();
+                        }
+                            
                     }
                     alert(data.msg);
                 });
@@ -321,6 +348,48 @@
                     });
                     return false;
                 });
+            });
+        }
+        $(document).on("click", "#agregar_patente", function (event) { event.preventDefault(); agregar_patente($(this).attr('data-id')) });
+        function agregar_patente(PedidoID)
+        {
+            event.preventDefault();
+            resetModal("Agregar Patente");
+            $.ajax({
+                url: '@(Url.Action("AgregarPatente", "Pedido"))',
+                data: {PedidoID: PedidoID},
+                type: 'GET',
+            }).done(function (data) {
+                $("#modal_body").html(data);
+                $("#boton_guardar").off('click');
+                $("#boton_guardar").click(function () { $("#modal_body form").submit(); });
+                $("#modal_body form").submit(function ()
+                {
+                    contenidoElemento($("#boton_guardar"), '<i class="fa fa-cog fa-spin"> </i> Guardando...', 'disabled', null);
+                    event.preventDefault();
+                    $.ajax({
+                        url: '@(Url.Action("AgregarPatente", "Pedido"))',
+                        type: "POST",
+                        data: $(this).serialize(),
+                        dataType: 'json'
+                    }).done(function (data)
+                    {
+                        if (data.status == true) {
+                            lockModalInputs()
+                            msg_modal_alert(data.msg, 'success');;
+                            $('#boton_guardar').addClass('hidden');
+                            $('#div_patentes').html(data.contenido);
+
+                            $(document).off("click", ".borrar_detalle");
+                            $(document).on("click", ".borrar_detalle", function () { eliminar_detalle($(this).attr('data-id'), $(this).attr('data-type')) });
+                        } else {
+                            msg_modal_alert(data.msg, 'danger');
+                        }
+                        contenidoElemento($("#boton_guardar"), 'Guardar', null, 'disabled');
+                    });
+                    return false;
+                });
+
             });
         }
 
@@ -420,8 +489,10 @@
 
         $('.ver_detalle').click(function () { ver_detalle($(this).attr('data-id'), $(this).attr('data-type')) });
         function ver_detalle(id, tipo)
-        {   
-            resetModal("Ver Detalle");
+        {
+            var tituloModal = "Ver detalle ";
+            tituloModal = tituloModal + getNombreTipo(TipoDetalle);
+            resetModal(tituloModal);
             $("#boton_guardar").off('click');
             $("#boton_guardar").addClass('hidden');
 
@@ -440,16 +511,20 @@
 
         $(".borrar_detalle").click(function () { eliminar_detalle($(this).attr('data-id'), $(this).attr('data-type')) });
         function eliminar_detalle(PedidoDetalleID, Tipo) {
-            if (confirm("Está seguro que desea eliminar #" + PedidoDetalleID)) {
+
+            var fila_id = '#' + getNombreTipo(Tipo).toLowerCase() + 's-' + PedidoDetalleID;
+
+            console.log(fila_id);
+            if (confirm("Está seguro que desea eliminar #" + getNombreTipo(Tipo))) {
                 $.ajax({
                     url: '@(Url.Action("EliminarDetallePedido", "Pedido"))',
-                    data: { PedidoDetalleID: PedidoDetalleID },
+                    data: { PedidoDetalleID: PedidoDetalleID, TipoDetalle: Tipo },
                     type: 'POST'
                 }).done(function (data){
                     alert(data.msg);
                     event.preventDefault();
                     if (data.status == true) {
-                        $('#' + Tipo + '-' + PedidoDetalleID).remove();
+                        $(fila_id).remove();
                     }
                 });
             }
@@ -459,8 +534,9 @@
 
         $(document).on("click", ".editar_detalle", function () { editar_pedidoDetalle($(this).attr('data-id'), $(this).attr('data-type')) });
         function editar_pedidoDetalle(DetalleID, TipoDetalle) {
-
-            resetModal("Editar " + TipoDetalle);
+            var tituloModal = "Editar ";
+            tituloModal = tituloModal + getNombreTipo(TipoDetalle);
+            resetModal(tituloModal);
             $.ajax({
                 url: '@Url.Action("EditPedidoDetalle","Pedido")',
                 data: { Detalle_ID: DetalleID, TipoDetalle: TipoDetalle },
@@ -492,6 +568,35 @@
             });
             $('#modal_contenido').modal('show');
 
+        }
+
+        function getNombreTipo(TipoDetalle) {
+            var titulo = "";
+            switch (TipoDetalle) {
+
+                case "1":
+                    titulo = titulo + "Servicio";
+                    break;
+                case "2":
+                    titulo = titulo + "Producto";
+                    break;
+                case "3":
+                    titulo = titulo + "Herramienta";
+                    break;
+                case "4":
+                    titulo = titulo + "Actividad";
+                    break;
+                case "5":
+                    titulo = titulo + "Archivo";
+                    break;
+                case "6":
+                    titulo = titulo + "Patente";
+                    break;
+                default:
+                    titulo = titulo + "Incorrecto";
+                    break;
+            }
+            return titulo;
         }
 
     });

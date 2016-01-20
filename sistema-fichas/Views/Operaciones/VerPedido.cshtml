@@ -19,6 +19,13 @@
     </div>
 </div>
 
+<div id="div_patente" class="col-xs-12 col-md-12 col-lg-12">
+    <h3>Patentes</h3>
+    <div id="div_patentes">
+        @(Html.Partial("~/Views/Pedido/_PatentesList.cshtml", Model.PatentesActivas))
+    </div>
+</div>
+
 <div id="div_producto" class="col-xs-12 col-md-12">
     <h3>Productos</h3>
     <div id="div_productos">

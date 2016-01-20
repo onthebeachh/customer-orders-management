@@ -17,3 +17,11 @@
     cursor: inherit;
     display: block;
 }
+
+.select2-results__option[aria-selected^=true] {
+     display: none;
+}
+
+.select2-results__option[aria-selected=true] {
+  display: none;
+}

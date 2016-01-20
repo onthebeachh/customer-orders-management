@@ -17,8 +17,7 @@
         @Html.HiddenFor(model => model.PedidoDetalle.EstadoDetalle_ID)
         @Html.HiddenFor(model => model.TipoDetalle)
         @Html.HiddenFor(model => model.PedidoDetalle.Tipo)
-        var totalCheckPerColumn = Model.Herramientas.Count()/3;
-        var i = 0;
+        
     <div class="row-fluid">
         
         <div class="col-md-12">
@@ -49,7 +48,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Herramientas, new { @class = "control-label col-md-3" })
                     <div class="col-md-9">
-                        @Html.DropDownListFor(model => model.PedidoDetalle.Herramienta_ID, Model.ListaHerramientas, new { @class = "form-control" })
+                        @Html.DropDownListFor(model => model.PedidoDetalle.Herramienta_ID, Model.ListaHerramientas, new { @class = "form-control", @multiple= "multiple" })
                         @Html.ValidationMessageFor(model => model.Herramientas, null, new { @class = "text-danger" })
                     </div>
                 </div>
@@ -78,7 +77,7 @@
 
 <script type="text/javascript">
     $(function () {
-        $('#@Html.IdFor(model => model.PedidoDetalle.Herramienta_ID)').select2();
+        $('#@Html.IdFor(model => model.PedidoDetalle.Herramienta_ID)').select2({});
     });
 </script>
 

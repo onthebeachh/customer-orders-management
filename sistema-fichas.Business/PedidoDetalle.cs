@@ -15,7 +15,9 @@ namespace sistema_fichas.Business
         Producto = 2,
         Herramienta = 3,
         Actividad = 4,
-        Adjunto = 5
+        Adjunto = 5,
+        Patente = 6
+        
     }
 
     public class PedidoDetalle : AuditableEntity<long>
@@ -24,6 +26,7 @@ namespace sistema_fichas.Business
         {
             this.FechaInicio = DateTime.Now;
             this.Finalizado = 0;
+            this.Patentes = new HashSet<Patente>();
         }
 
         [DisplayName("Cantidad")]
@@ -107,6 +110,9 @@ namespace sistema_fichas.Business
         [DisplayName("Estado")]
         [DisplayFormat(NullDisplayText = "N/A")]
         public virtual Moneda Moneda { get; set; }
+
+        [DisplayName("Patentess")]
+        public virtual ICollection<Patente> Patentes { get; set; }
 
     }
 }

@@ -63,6 +63,7 @@
     <Compile Include="IIndustriaRepository.cs" />
     <Compile Include="IModalidadRepository.cs" />
     <Compile Include="IMonedaRepository.cs" />
+    <Compile Include="IPatenteRepository.cs" />
     <Compile Include="IPedidoDetalleRepository.cs" />
     <Compile Include="IPedidoRepository.cs" />
     <Compile Include="ITipoClienteRepository.cs" />

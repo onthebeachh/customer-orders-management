@@ -16,6 +16,7 @@ namespace sistema_fichas.Business
             this.Direcciones = new HashSet<Direccion>();
             this.Contactos = new HashSet<Contacto>();
             this.Pedidos = new HashSet<Pedido>();
+            this.Patentes = new HashSet<Patente>();
 
             this.TipoCliente_ID = 1;
             this.Estado = 1;
@@ -83,13 +84,7 @@ namespace sistema_fichas.Business
         public virtual ICollection<Direccion> Direcciones { get; set; }
         public virtual ICollection<Contacto> Contactos { get; set; }
         public virtual ICollection<Pedido> Pedidos { get; set; }
-
-
-        
-
-
-
-
+        public virtual ICollection<Patente> Patentes { get; set; }
 
         
 

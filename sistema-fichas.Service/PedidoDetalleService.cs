@@ -13,7 +13,6 @@ namespace sistema_fichas.Service
     {
         IUnitOfWork _unitOfWork;
         IPedidoDetalleRepository _pedidoDetalleRepository;
-        IEstadoDetalleService _estadoDetalleService;
 
         public PedidoDetalleService(IUnitOfWork unitOfWork, IPedidoDetalleRepository pedidoDetalleRepository)
             : base(unitOfWork, pedidoDetalleRepository)

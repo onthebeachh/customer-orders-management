@@ -54,6 +54,7 @@
     <Compile Include="IndustriaService.cs" />
     <Compile Include="ModalidadService.cs" />
     <Compile Include="MonedaService.cs" />
+    <Compile Include="PatenteService.cs" />
     <Compile Include="PedidoDetalleService.cs" />
     <Compile Include="PedidoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

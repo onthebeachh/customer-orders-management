@@ -47,7 +47,7 @@ namespace sistema_fichas.Helpers
 
             return new MvcHtmlString(icon);
         }
-
+        
         public static MvcHtmlString botonEliminar(this HtmlHelper helper, int tipo, string dataId)
         {
             var icon = String.Empty;

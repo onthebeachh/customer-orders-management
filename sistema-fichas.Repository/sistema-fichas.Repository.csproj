@@ -61,6 +61,7 @@
     <Compile Include="IndustriaRepository.cs" />
     <Compile Include="ModalidadRepository.cs" />
     <Compile Include="MonedaRepository.cs" />
+    <Compile Include="PatenteRepository.cs" />
     <Compile Include="PedidoDetalleRepository.cs" />
     <Compile Include="PedidoRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

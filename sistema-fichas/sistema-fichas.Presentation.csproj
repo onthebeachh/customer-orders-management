@@ -247,6 +247,7 @@
     <Compile Include="ViewModels\ClienteViewModel.cs" />
     <Compile Include="ViewModels\ContactoViewModel.cs" />
     <Compile Include="ViewModels\DireccionViewModel.cs" />
+    <Compile Include="ViewModels\HerramientaViewModel.cs" />
     <Compile Include="ViewModels\PedidoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -472,6 +473,8 @@
     <Content Include="Views\Operaciones\VerPedido.cshtml" />
     <Content Include="Views\Operaciones\_AgregarActividad.cshtml" />
     <Content Include="Views\Operaciones\_BotonesPedidoDetalle.cshtml" />
+    <Content Include="Views\Pedido\_PatentesList.cshtml" />
+    <Content Include="Views\Pedido\_AgregarPatente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

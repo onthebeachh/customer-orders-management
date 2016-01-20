@@ -31,8 +31,9 @@ namespace sistema_fichas.Controllers
         IEstadoPedidoService _EstadoPedidoService;
         IClienteService _ClienteService;
         IUsuarioService _UsuarioService;
+        IPatenteService _PatenteService;
 
-        public PedidoController(IPedidoService PedidoService, IAdjuntoService AdjuntoService, IPedidoDetalleService PedidoDetalleService, ICatalogoService CatalogoService, IModalidadService ModalidadService, IMonedaService MonedaService, IHerramientaService HerramientaService, IEstadoDetalleService EstadoDetalleService, IEstadoPedidoService EstadoPedidoService, IClienteService ClienteService, IUsuarioService UsuarioService)
+        public PedidoController(IPedidoService PedidoService, IAdjuntoService AdjuntoService, IPedidoDetalleService PedidoDetalleService, ICatalogoService CatalogoService, IModalidadService ModalidadService, IMonedaService MonedaService, IHerramientaService HerramientaService, IEstadoDetalleService EstadoDetalleService, IEstadoPedidoService EstadoPedidoService, IClienteService ClienteService, IUsuarioService UsuarioService, IPatenteService PatenteService)
         {
             this._PedidoService = PedidoService;
             this._AdjuntoService = AdjuntoService;
@@ -45,6 +46,7 @@ namespace sistema_fichas.Controllers
             this._EstadoPedidoService = EstadoPedidoService;
             this._ClienteService = ClienteService;
             this._UsuarioService = UsuarioService;
+            this._PatenteService = PatenteService;
         }
 
         public ActionResult Index(string busqueda, string tipo_filtro)
@@ -249,6 +251,23 @@ namespace sistema_fichas.Controllers
             }
         }
 
+        public ActionResult AgregarPatente(int PedidoID)
+        {
+            Patente Patente = new Patente();
+
+            if (Request.IsAjaxRequest())
+            {
+                Pedido p = _PedidoService.GetById(PedidoID);
+                Patente.Pedido_ID = p.ID;
+                Patente.Cliente_ID = p.Cliente_ID;
+                Patente.Status = true;
+                Patente.Estado = TipoEstadoPatente.Activa.GetHashCode();
+                return PartialView("_AgregarPatente", Patente);
+            }
+            return View(Patente);
+
+        }
+        
         public ActionResult EditPedidoDetalle(int Detalle_ID, int TipoDetalle)
         {
             
@@ -311,6 +330,28 @@ namespace sistema_fichas.Controllers
             return PartialView();
         }
 
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AgregarPatente(Patente Patente)
+        {
+            var msg_error = String.Format(mensaje_error, "agregar una patente");
+            try {
+                if (ModelState.IsValid)
+                {
+                    _PatenteService.Create(Patente);
+                    IEnumerable<Patente> Patentes = _PatenteService.GetAllByPedidoId(Patente.Pedido_ID.Value, true).ToList();
+                    return Json(new { msg = "Patente ingresada <b>exitosamente</b>", status = status_success, contenido = RenderPartialViewToString("_PatentesList", Patentes) });
+                }
+                return Json(new { status = status_error, msg = msg_error });
+            }
+
+            catch (Exception e)
+            {
+                return Json(new { status = status_error, msg = msg_error + System.Environment.NewLine + e.Message });
+            }
+        }
+
         [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult EditPedidoDetalle(PedidoDetalle PedidoDetalle)
@@ -371,11 +412,12 @@ namespace sistema_fichas.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AgregarHerramienta(PedidoDetalle PedidoDetalle) {
+        public ActionResult AgregarHerramienta(PedidoDetalle PedidoDetalle, FormCollection form) {
             var msg_error = String.Format(mensaje_error,"agregar una herramienta");
+            
             try {
                 if(ModelState.IsValid){
-
+                    String ListaHerramientas = form["Herramienta_ID"];
                     int EstadoDetalle_ID = _EstadoDetalleService.GetIdEstadoInicial();
                     int TipoPedidoDetalle_Id = TipoPedidoDetalle.Herramienta.GetHashCode();
 
@@ -599,7 +641,7 @@ namespace sistema_fichas.Controllers
                 
                 Pedido.EstadoPedido_ID = EstadoID;
                 _PedidoService.Update(Pedido);
-                return Json(new { status = status_success, msg = msg_success, url = Url.Action("Details", "Pedido", new { ID = PedidoID }), contenido = RenderPartialViewToString("~/Views/Pedido/_PedidoDetalle.cshtml", Pedido), contenidoBotones = RenderPartialViewToString("~/Views/Pedido/_BotonesPedidoDetalle.cshtml", Pedido) });
+                return Json(new { status = status_success, estado = EstadoID, msg = msg_success, url = Url.Action("Details", "Pedido", new { ID = PedidoID }), contenido = RenderPartialViewToString("~/Views/Pedido/_PedidoDetalle.cshtml", Pedido), contenidoBotones = RenderPartialViewToString("~/Views/Pedido/_BotonesPedidoDetalle.cshtml", Pedido) });
             }
             catch (Exception e)
             {
@@ -671,7 +713,7 @@ namespace sistema_fichas.Controllers
         }
 
         [HttpPost]
-        public ActionResult EliminarDetallePedido(int PedidoDetalleID)
+        public ActionResult EliminarDetallePedido(int PedidoDetalleID, int TipoDetalle)
         {
 
             String msg_error = "Ocurrio un problema al intentar borrar el servicio, por favor intente de nuevo.";
@@ -683,19 +725,35 @@ namespace sistema_fichas.Controllers
                 {
                     throw new Exception("Detalle: Debe especificar una ID del Pedido Detalle"); 
                 }
-                PedidoDetalle PedidoDetalle = _PedidoDetalleService.GetById(PedidoDetalleID);
-                int EstadoDetalle_ID = _EstadoDetalleService.GetIdEstadoInactivo();
+
+                if (TipoDetalle == TipoPedidoDetalle.Patente.GetHashCode())
+                {
+                    Patente Patente = _PatenteService.GetById(PedidoDetalleID);
+
+                    if (Patente == null)
+                        throw new Exception("Detalle: El Detalle no existe.");
+
+                    Patente.Estado = TipoEstadoPatente.Inactiva.GetHashCode();
+                    _PatenteService.Update(Patente);
+                }
+                else
+                {
+                    PedidoDetalle PedidoDetalle = _PedidoDetalleService.GetById(PedidoDetalleID);
+                    int EstadoDetalle_ID = _EstadoDetalleService.GetIdEstadoInactivo();
 
 
-                if (PedidoDetalle == null)
-                    throw new Exception("Detalle: El Detalle no existe.");
+                    if (PedidoDetalle == null)
+                        throw new Exception("Detalle: El Detalle no existe.");
 
-                if (PedidoDetalle == null)
-                    throw new Exception("Detalle: No Existe un estado inactivo en la BD.");
+                    if (EstadoDetalle_ID == null)
+                        throw new Exception("Detalle: No Existe un estado inactivo en la BD.");
+
+
+                    PedidoDetalle.EstadoDetalle_ID = EstadoDetalle_ID;
+                    _PedidoDetalleService.Update(PedidoDetalle);
+                }
+
                 
-                
-                PedidoDetalle.EstadoDetalle_ID = EstadoDetalle_ID;
-                _PedidoDetalleService.Update(PedidoDetalle);
                 
                 return Json(new { status = status_success, msg = msg_success });
                 

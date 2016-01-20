@@ -40,6 +40,7 @@ namespace sistema_fichas.Business
         public DbSet<Herramienta> Herramientas { get; set; }
         public DbSet<Modalidad> Modalidades { get; set; }
         public DbSet<Moneda> Monedas { get; set; }
+        public DbSet<Patente> Patentes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -72,18 +73,6 @@ namespace sistema_fichas.Business
                     m.MapRightKey("Herramienta_ID");
                 });
 
-            /*
-            modelBuilder.Entity<Pedido>()
-                        .HasRequired<UserProfile>(s => s.UserProfile)
-                        .WithMany(s => s.Pedidos)
-                        .HasForeignKey(s => s.UserProfile_ID);
-            
-            modelBuilder.Entity<Cliente>()
-                        .HasRequired<UserProfile>(s => s.Usuario)
-                        .WithMany(s => s.Clientes)
-                        .HasForeignKey(s => s.User_ID);
-            */
-            
         }
 
 
