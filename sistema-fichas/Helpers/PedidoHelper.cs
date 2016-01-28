@@ -39,6 +39,10 @@ namespace sistema_fichas.Helpers
             return (esEditable(EstadoPedido) && esActivo(EstadoDetalle)) ? true : false;
         }
 
+        public static bool esAprobadoOperaciones(int EstadoDetalle, int EstadoPedido)
+        {
+            return (EstadoPedido == TipoEstadoPedido.Aprobado_Operaciones.GetHashCode() && (EstadoDetalle == TipoEstadoDetalle.Activo.GetHashCode() || EstadoDetalle == TipoEstadoDetalle.Deshabilitado.GetHashCode())) ? true : false;
+        }
         //Condiciones: Para que sea un estado anulable, tiene que ser Ingresado, Revision, Aprobado/Rechazado por comercial.
         //estas condiciones son validas inicialmente para el área comercial.
         public static bool EstadoAnulable(int EstadoPedido) {
@@ -80,6 +84,11 @@ namespace sistema_fichas.Helpers
         public static bool esEditableOperaciones(int pedido)
         {
             return (pedido == TipoEstadoPedido.Aprobado_Comercial.GetHashCode()) ? true : false;
+        }
+
+        public static string getColorServicio(int TipoEstadoServicio)
+        {
+            return (TipoEstadoServicio == TipoEstadoDetalle.Activo.GetHashCode()) ? "label-success" : "label-warning";
         }
     }
 }

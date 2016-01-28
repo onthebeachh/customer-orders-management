@@ -143,6 +143,7 @@ namespace sistema_fichas.Controllers
         public ActionResult AgregarServicio(int PedidoID)
         {
             PedidoViewModel PedidoVM = new PedidoViewModel();
+            PedidoVM.PedidoDetalle.EstadoDetalle = _EstadoDetalleService.GetById(_EstadoDetalleService.GetIdEstadoInicial()); 
             DateTime fecha = DateTime.Now;
             DateTime fecha_fin = fecha.AddMonths(6);
             try
@@ -272,10 +273,11 @@ namespace sistema_fichas.Controllers
         {
             
             PedidoViewModel PedidoVM = new PedidoViewModel();
-            PedidoVM.PedidoDetalle = _PedidoDetalleService.GetById(Detalle_ID); // db.PedidosDetalle.Find(Detalle_ID);
-            PedidoVM.Modalidades = _ModalidadService.GetAll(); // db.Modalidades.Where(m => m.Estado == 1);
+            PedidoVM.PedidoDetalle = _PedidoDetalleService.GetById(Detalle_ID); 
+            PedidoVM.Modalidades = _ModalidadService.GetAll(); 
             PedidoVM.TipoDetalle = TipoDetalle.ToString();
-            PedidoVM.Monedas = _MonedaService.GetAll(); // db.Monedas.Where(m => m.Estado == 1);
+            PedidoVM.Monedas = _MonedaService.GetAll(); 
+            PedidoVM.EstadosPedidoDetalle = _EstadoDetalleService.GetAll();
             var tipoPedidoDetalle = "";
             try
             {
@@ -343,6 +345,7 @@ namespace sistema_fichas.Controllers
                     IEnumerable<Patente> Patentes = _PatenteService.GetAllByPedidoId(Patente.Pedido_ID.Value, true).ToList();
                     return Json(new { msg = "Patente ingresada <b>exitosamente</b>", status = status_success, contenido = RenderPartialViewToString("_PatentesList", Patentes) });
                 }
+                msg_error = "La patente que ha ingresado no es válida";
                 return Json(new { status = status_error, msg = msg_error });
             }
 
@@ -765,5 +768,44 @@ namespace sistema_fichas.Controllers
 
         }
 
+
+        [HttpPost]
+        public ActionResult CambiarEstadoServicio(int PedidoDetalleID, int TipoEstadoServicio)
+        {
+            String msg_error = "Ocurrio un problema al intentar cambiar el estado del servicio, por favor intente de nuevo.";
+            String msg_success = "El Detalle ha sido cambiado exitosamente";
+
+            try
+            {
+                if (PedidoDetalleID == null)
+                {
+                    throw new Exception("Detalle: Debe especificar una ID del Pedido Detalle");
+                }
+
+                
+                PedidoDetalle PedidoDetalle = _PedidoDetalleService.GetById(PedidoDetalleID);
+                bool esActivo = (PedidoDetalle.EstadoDetalle.Estado == TipoEstadoDetalle.Activo.GetHashCode());
+                int EstadoDetalle_ID = _EstadoDetalleService.GetIdEstado((esActivo) ? TipoEstadoDetalle.Deshabilitado.GetHashCode() : TipoEstadoDetalle.Activo.GetHashCode());    
+
+                if (PedidoDetalle == null)
+                    throw new Exception("Detalle: El Detalle no existe.");
+
+                if (EstadoDetalle_ID == null)
+                    throw new Exception("Detalle: No Existe un estado deshabilitado en la BD.");
+
+
+                PedidoDetalle.EstadoDetalle_ID = EstadoDetalle_ID;
+                _PedidoDetalleService.Update(PedidoDetalle);
+
+                var Pedidos = _PedidoDetalleService.GetPedidosDetalleServicio(PedidoDetalle.Pedido_ID).ToList();
+
+                return Json(new { msg = msg_success, status = status_success, contenido = RenderPartialViewToString("_ServiciosList", Pedidos) });
+
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = status_error, msg = msg_error + System.Environment.NewLine + e.Message });
+            }
+        }         
     }
 }

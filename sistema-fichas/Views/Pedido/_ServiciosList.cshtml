@@ -41,11 +41,12 @@
                         <td class="text-center"> @Html.DisplayFor(modelItem => item.Catalogo.Nombre) </td>
                         <td class="text-center"> @Html.DisplayFor(modelItem => item.FechaInicio)</td>
                         <td class="text-center"> @Html.DisplayFor(modelItem => item.FechaTermino)</td>
-                        <td class ="text-center"><label class="label label-success">@Html.DisplayFor(modelItem => item.EstadoDetalle.Nombre)</label></td>
+                        <td class ="text-center"><label class="label @(PedidoHelper.getColorServicio(item.EstadoDetalle.Estado))">@Html.DisplayFor(modelItem => item.EstadoDetalle.Nombre)</label></td>
                         <td class="text-center">
                             @Html.botonVer(sistema_fichas.Business.TipoPedidoDetalle.Servicio.GetHashCode(), item.ID.ToString())
                             @Html.botonEditar(sistema_fichas.Business.TipoPedidoDetalle.Servicio.GetHashCode(), item.ID.ToString()).If(PedidoHelper.esActivoEditable(item.EstadoDetalle.Estado, item.Pedido.EstadoPedido.Estado))
                             @Html.botonEliminar(sistema_fichas.Business.TipoPedidoDetalle.Servicio.GetHashCode(), item.ID.ToString()).If(PedidoHelper.esActivoEditable(item.EstadoDetalle.Estado, item.Pedido.EstadoPedido.Estado))
+                            @Html.botonDeshabilitar(sistema_fichas.Business.TipoPedidoDetalle.Servicio.GetHashCode(), item.ID.ToString(), item.EstadoDetalle.Estado).If(PedidoHelper.esAprobadoOperaciones(item.EstadoDetalle.Estado, item.Pedido.EstadoPedido.Estado)).If(AuthorizationHelper.isAdministradorComercial(User))
                         </td>
                     </tr>
                 }

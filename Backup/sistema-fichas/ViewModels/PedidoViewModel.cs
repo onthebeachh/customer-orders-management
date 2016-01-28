@@ -27,33 +27,57 @@ namespace sistema_fichas.ViewModels
         public PedidoDetalle PedidoDetalle { get; set; }
         public IEnumerable<Modalidad> Modalidades { get; set; }
         public IEnumerable<Herramienta> Herramientas { get; set; }
-        public IEnumerable<EstadoDetalle> EstadosPedidoDetalle { get; set; }
         public IEnumerable<Moneda> Monedas { get; set; }
         public IEnumerable<UserProfile> Users { get; set; }
-        public IEnumerable<Patente> Patentes { get; set; }
 
-        public IEnumerable<PedidoDetalle> HerramientasActivas { get { return this.PedidosDetalles.Where(p => p.Tipo == TipoPedidoDetalle.Herramienta.GetHashCode()).ToList(); } }
+        public IEnumerable<PedidoDetalle> HerramientasActivas
+        {
+            get
+            {
+                return this.PedidosDetalles.Where(p => p.Tipo == TipoPedidoDetalle.Herramienta.GetHashCode()).ToList();
+            }
+        }
 
-        public IEnumerable<PedidoDetalle> ActividadesActivas { get { return this.PedidosDetalles.Where(p => p.Tipo == TipoPedidoDetalle.Actividad.GetHashCode()).ToList(); } }
+        public IEnumerable<PedidoDetalle> ActividadesActivas
+        {
+            get
+            {
+                return this.PedidosDetalles.Where(p => p.Tipo == TipoPedidoDetalle.Actividad.GetHashCode()).ToList();
+            }
+        }
 
-        public IEnumerable<PedidoDetalle> ProductosActivos { get { return this.PedidosDetalles.Where(p => p.Tipo == TipoPedidoDetalle.Producto.GetHashCode()).ToList(); } }
+        public IEnumerable<PedidoDetalle> ProductosActivos
+        {
+            get
+            {
+                return this.PedidosDetalles.Where(p => p.Tipo == TipoPedidoDetalle.Producto.GetHashCode()).ToList();
+            }
+        }
 
-        public IEnumerable<PedidoDetalle> ServiciosActivos { get { return this.PedidosDetalles.Where(p => p.Tipo == TipoPedidoDetalle.Servicio.GetHashCode()).ToList(); } }
+        public IEnumerable<PedidoDetalle> ServiciosActivos
+        {
+            get
+            {
+                return this.PedidosDetalles.Where(p => p.Tipo == TipoPedidoDetalle.Servicio.GetHashCode()).ToList();
+            }
+        }
 
-        public IEnumerable<Adjunto> AdjuntosActivos { get {  return Pedido.Adjuntos.Where(s => s.Estado == 1); } }
-
-        public IEnumerable<Patente> PatentesActivas { get { return Pedido.Patentes.Where(s => s.Estado == TipoEstadoPatente.Activa.GetHashCode()).ToList(); } }
+        public IEnumerable<Adjunto> AdjuntosActivos
+        {
+            get
+            {
+                return Pedido.Adjuntos.Where(s => s.Estado == 1);
+            }
+        }
         
-        public SelectList ListaPatentes { get { return new SelectList(this.Patentes.ToList(), "ID", "Numero", null); } }
 
         public SelectList ListaHerramientas { get { return new SelectList(this.Herramientas.ToList(), "ID", "Nombre", null); } }
         public SelectList ListaModalidades { get { return new SelectList(this.Modalidades.ToList(), "ID", "Nombre", null); } }
         public SelectList ListaMonedas { get { return new SelectList(this.Monedas.ToList(), "ID", "Alias", null); } }
-        public SelectList ListaProductos { get { return new SelectList(this.Productos.ToList(), "ID", "Nombre", null); } }
-        public SelectList ListaEstadoPedido { get { return new SelectList(this.EstadosPedidos, "ID", "Nombre", null); } }
-        public SelectList ListaEstadoPedidoDetalle { get { return new SelectList(this.EstadosPedidoDetalle.ToList(), "ID", "Nombre", null); } }
-        public SelectList ListaClientes { get { return new SelectList(this.Clientes, "ID", "RazonSocial", null); } }
-        public SelectList ListaUsuarios { get { return new SelectList(this.Users, "UserId", "UserName", null); } }
+        public SelectList ListaProductos { get { return new SelectList(Productos.ToList(), "ID", "Nombre", null); } }
+        public SelectList ListaEstadoPedido { get { return new SelectList(EstadosPedidos, "ID", "Nombre", null); } }
+        public SelectList ListaClientes { get { return new SelectList(Clientes, "ID", "RazonSocial", null); } }
+        public SelectList ListaUsuarios { get { return new SelectList(Users, "UserId", "UserName", null); } }
         public SelectList ListaTipoCobro { get { return new SelectList(new[] { new SelectListItem { Value = "1", Text = "Total" }, new SelectListItem { Value = "2", Text = "Proporcional/Instalación" }, }, "Value", "Text"); } }
 
         public IEnumerable<PedidoDetalle> PedidosDetalles { get; set; }

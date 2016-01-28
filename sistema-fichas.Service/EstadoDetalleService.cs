@@ -25,6 +25,10 @@ namespace sistema_fichas.Service
             return _estadoDetalleRepository.GetById(Id);
         }
 
+        public int GetIdEstadoDeshabilitado() {
+            return _estadoDetalleRepository.getIdEstado(TipoEstadoDetalle.Deshabilitado.GetHashCode());
+        }
+
         public int GetIdEstadoInicial()
         {
             return _estadoDetalleRepository.getIdEstado(TipoEstadoDetalle.Activo.GetHashCode());

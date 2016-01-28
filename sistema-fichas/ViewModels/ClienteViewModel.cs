@@ -29,13 +29,7 @@ namespace sistema_fichas.ViewModels
         * SET DE VARIABLES PARA MOSTRAR LOS ESTADOS DE LOS CLIENTES
         */
         [DisplayName("Estado Cliente")]
-        public SelectList ListaEstadoCliente
-        {
-            get
-            {
-                return new SelectList(EstadoCliente.Where(s=> s.Value != "0").ToList(), "text", "value", (this.cliente == null) ? null : this.cliente.Estado.ToString());
-            }
-        }
+        public SelectList ListaEstadoCliente { get { return new SelectList(EstadoCliente.Where(s=> s.Value != "0").ToList(), "text", "value", (this.cliente == null) ? null : this.cliente.Estado.ToString()); } }
         public IEnumerable<SelectListItem> EstadoCliente
         {
             get

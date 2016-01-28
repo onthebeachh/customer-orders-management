@@ -5,12 +5,12 @@
     <div class="form-group pull-right">
         @if (PedidoHelper.esEditable(Model.EstadoPedido.Estado))
         {
-           
-            <a href="#" id="editar_pedido" data-toggle="modal" data-target="#modal_contenido" data-id="@Model.ID">
-                @Html.BSbutton("info btn-sm", "Editar info", "check")
-            </a>
+
             if (ViewBag.iSOwner)
             {
+                <a href="#" id="editar_pedido" data-toggle="modal" data-target="#modal_contenido" data-id="@Model.ID">
+                    @Html.BSbutton("info btn-sm", "Editar info", "check")
+                </a>
                 <a href="#" class="cambiar_estado" data-id="@Model.ID" data-text="enviar a revisión" data-action="@sistema_fichas.Business.TipoEstadoPedido.Revision.GetHashCode()">
                     @Html.BSbutton("primary btn-sm", "Enviar a revisión", "paper-plane")
                 </a>

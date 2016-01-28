@@ -48,7 +48,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Herramientas, new { @class = "control-label col-md-3" })
                     <div class="col-md-9">
-                        @Html.DropDownListFor(model => model.PedidoDetalle.Herramienta_ID, Model.ListaHerramientas, new { @class = "form-control", @multiple= "multiple" })
+                        @Html.DropDownListFor(model => model.PedidoDetalle.Herramienta_ID, Model.ListaHerramientas, new { @class = "form-control" /*, @multiple= "multiple" */ })
                         @Html.ValidationMessageFor(model => model.Herramientas, null, new { @class = "text-danger" })
                     </div>
                 </div>

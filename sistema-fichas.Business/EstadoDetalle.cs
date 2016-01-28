@@ -14,7 +14,9 @@ namespace sistema_fichas.Business
         Activo = 1,
         Agendado = 2,
         Parcial = 3,
-        Finalizado = 4
+        Finalizado = 4,
+        Deshabilitado = 5,
+
 
     }
 

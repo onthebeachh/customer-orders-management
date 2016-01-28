@@ -13,5 +13,6 @@ namespace sistema_fichas.Service.Core
         int GetIdEstado(int Estado_ID);
         int GetIdEstadoInicial();
         int GetIdEstadoInactivo();
+        int GetIdEstadoDeshabilitado();
     }
 }

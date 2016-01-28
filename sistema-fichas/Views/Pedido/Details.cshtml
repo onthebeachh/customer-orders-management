@@ -491,7 +491,7 @@
         function ver_detalle(id, tipo)
         {
             var tituloModal = "Ver detalle ";
-            tituloModal = tituloModal + getNombreTipo(TipoDetalle);
+            tituloModal = tituloModal + getNombreTipo(tipo);
             resetModal(tituloModal);
             $("#boton_guardar").off('click');
             $("#boton_guardar").addClass('hidden');
@@ -531,6 +531,30 @@
             return false;
         }
 
+    $(".cambiar_estado_servicio").click(function () { cambiar_estado_servicio($(this).attr('data-id'), $(this).attr('data-status'), $(this).attr('data-type')) });
+    function cambiar_estado_servicio(PedidoDetalleID, TipoEstadoDetalle, Tipo) {
+
+            var fila_id = getNombreTipo(Tipo).toLowerCase() + 's';
+
+            console.log(fila_id);
+            if (confirm("Está seguro que desea cambiar el estado de este " + getNombreTipo(Tipo))) {
+                $.ajax({
+                    url: '@(Url.Action("CambiarEstadoServicio", "Pedido"))',
+                    data: { PedidoDetalleID: PedidoDetalleID, TipoEstadoServicio: Tipo },
+                    type: 'POST'
+                }).done(function (data){
+                    
+                    event.preventDefault();
+                    if (data.status == true) {
+                        $("#div_" + fila_id.toLowerCase()).html(data.contenido);
+                        console.log(data.contenido);
+                        console.log(fila_id.toLowerCase());
+                    }
+                    alert(data.msg);
+                });
+            }
+            return false;
+        }
 
         $(document).on("click", ".editar_detalle", function () { editar_pedidoDetalle($(this).attr('data-id'), $(this).attr('data-type')) });
         function editar_pedidoDetalle(DetalleID, TipoDetalle) {
